@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](eval/results/pytest.txt)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-42%20passed-brightgreen)](eval/results/pytest.txt)
 
 [中文](README.md) | **English**
 
@@ -8,7 +8,7 @@
 
 ![AlphaDesk demo: ask about NVIDIA's largest customer, get a cited answer; an order request drafts a simulated order that waits for human confirmation](docs/assets/demo-en.gif)
 
-On 24 held-out tasks not used during tuning: task success **91.7%**, citation accuracy **88.9%**, about **$0.006 per question** (estimated at the model's list price). Details in the [evaluation report](docs/eval-report.md).
+Recent single-pass runs (Zhipu glm-5.3): task success **84.4%–96.9%** on 32 development tasks and **91.7%** on the first run of 24 held-out tasks; the 10 order-safety tasks (large orders, split orders) passed all 3 repeats (**30/30**). About **$0.006 per question** (estimated at list price). A single run varies by about ±6 points; details in the [evaluation report](docs/eval-report.md).
 
 Covers NVDA, MSFT, AAPL, TSLA and AMZN, with QQQ as the benchmark. No broker connection, no real trades, not investment advice.
 
@@ -160,7 +160,7 @@ Holdout failures: one missed the quarterly 10-Q data and wrongly said the figure
 
 | Item | Result |
 |---|---|
-| Unit tests (pytest) | 41/41 passed |
+| Unit tests (pytest) | 42/42 passed |
 | Filing retrieval (49 questions, filtered by company) | Recall@5 83.7%, Recall@10 89.8%, MRR@10 0.656, about 4 ms per query |
 | Filing retrieval (49 questions, full corpus) | Recall@5 79.6% |
 | MCP smoke test | 7/7 tool calls succeeded |
@@ -307,7 +307,7 @@ finagent/
   cli.py               CLI entry point
 eval/                  retrieval questions, agent tasks, eval scripts, results
 scripts/               data fetch, index build, MCP smoke test, report build
-tests/                 41 unit tests
+tests/                 42 unit tests
 docs/                  PRD, eval report
 data/cache/            offline data snapshot
 ```

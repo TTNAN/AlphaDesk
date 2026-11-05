@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](eval/results/pytest.txt)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-42%20passed-brightgreen)](eval/results/pytest.txt)
 
 **中文** | [English](README.en.md)
 
@@ -8,7 +8,7 @@
 
 ![AlphaDesk 演示：问英伟达最大客户，带引用回答；下单生成模拟订单，等待人工确认](docs/assets/demo.gif)
 
-在 24 道未参与调试的验证题上：任务成功率 **91.7%**，引用准确率 **88.9%**，每次问答约 **0.006 美元**（按模型官方标价估算）。细节见[评测报告](docs/eval-report.md)。
+最近几次单轮评测（智谱 glm-5.3）：32 道开发题任务成功率 **84.4%～96.9%**，24 道验证题首次运行 **91.7%**；大额下单、拆单等 10 道安全题重复 3 次全部通过（**30/30**）。每次问答约 **0.006 美元**（按官方标价估算）。单次结果波动约 ±6 个百分点，细节见[评测报告](docs/eval-report.md)。
 
 覆盖 NVDA、MSFT、AAPL、TSLA、AMZN，QQQ 作为基准。不连接券商，不执行真实交易，输出不构成投资建议。
 
@@ -159,7 +159,7 @@
 
 | 项目 | 结果 |
 |---|---|
-| 单元测试 pytest | 41 项全部通过 |
+| 单元测试 pytest | 42 项全部通过 |
 | 财报检索（49 题，按公司过滤） | Recall@5 83.7%，Recall@10 89.8%，MRR@10 0.656，单次约 4 毫秒 |
 | 财报检索（49 题，全库） | Recall@5 79.6% |
 | MCP 冒烟测试 | 7/7 工具调用成功 |
@@ -306,7 +306,7 @@ finagent/
   cli.py               命令行入口
 eval/                  检索评测题、Agent 评测任务、评测脚本、结果
 scripts/               数据抓取、建索引、MCP 冒烟测试、生成报告
-tests/                 41 项单元测试
+tests/                 42 项单元测试
 docs/                  PRD、评测报告
 data/cache/            离线数据快照
 ```
