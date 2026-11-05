@@ -40,10 +40,15 @@ class OpenAICompatLLM:
             raise RuntimeError("缺少 API_KEY 或 MODEL 环境变量，见 README 快速开始")
         self.client = OpenAI(base_url=base_url or cfg["base_url"], api_key=key, timeout=timeout)
         self.temperature = temperature
+        # 推理型模型（如智谱 GLM-5.x）默认开启思考，延迟高。设置 FINAGENT_THINKING=disabled 关闭。
+        self.extra_body = None
+        if os.getenv("FINAGENT_THINKING", "").lower() == "disabled":
+            self.extra_body = {"thinking": {"type": "disabled"}}
 
     def complete(self, messages: list[dict], tools: list[dict]) -> tuple[dict, dict]:
         resp = self.client.chat.completions.create(
-            model=self.model, messages=messages, tools=tools or None, temperature=self.temperature)
+            model=self.model, messages=messages, tools=tools or None, temperature=self.temperature,
+            extra_body=self.extra_body)
         m = resp.choices[0].message
         msg: dict = {"role": "assistant", "content": m.content or ""}
         if m.tool_calls:

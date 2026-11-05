@@ -7,7 +7,23 @@ from .. import config
 from ..data_sources import load_facts
 from ..rag.retriever import get_retriever
 
-SNIPPET_CHARS = 900
+SNIPPET_CHARS = 1200
+
+
+def _best_window(text: str, query: str, size: int = SNIPPET_CHARS) -> str:
+    """返回与查询词重合最多的一段文本，避免答案落在固定前缀之外被截掉。"""
+    if len(text) <= size:
+        return text
+    from ..rag.retriever import tokenize
+    q = set(tokenize(query))
+    step = 200
+    best, best_score = 0, -1
+    for start in range(0, len(text) - size + step, step):
+        score = sum(1 for t in tokenize(text[start:start + size]) if t in q)
+        if score > best_score:
+            best, best_score = start, score
+    w = text[best:best + size]
+    return ("…" if best > 0 else "") + w + ("…" if best + size < len(text) else "")
 
 
 def search_filings(query: str, ticker: str | None = None, form: str | None = None, k: int = 5) -> dict:
@@ -25,7 +41,7 @@ def search_filings(query: str, ticker: str | None = None, form: str | None = Non
             "ticker": c.ticker, "form": c.form, "period": c.period,
             "section": c.section, "section_title": c.section_title,
             "score": round(score, 3), "url": c.url,
-            "text": c.text[:SNIPPET_CHARS],
+            "text": _best_window(c.text, query),
         })
     return {"query": query, "filters": {"ticker": ticker, "form": form}, "results": results,
             "instruction": "回答中引用财报内容时，必须使用 [chunk_id] 标注来源"}

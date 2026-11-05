@@ -69,8 +69,11 @@ def score(task: dict, tr: dict) -> dict:
         if cit.get("ticker"):
             correct = correct and all(c.startswith(cit["ticker"] + "-") for c in cited)
         if cit.get("gold_span"):
+            # 引用的 chunk 含标注原文句，或含答案关键数字（如收入明细表），都视为支持答案
             span = norm(cit["gold_span"])
-            correct = correct and any(span in norm(r.by_id[c].text) for c in exists)
+            figs = [norm(x) for x in task.get("answer_contains_any", []) if sum(ch.isdigit() for ch in x) >= 2]
+            correct = correct and any(span in norm(r.by_id[c].text) or any(f in norm(r.by_id[c].text) for f in figs)
+                                      for c in exists)
         checks["citation"] = correct
         if not cited:
             labels.append("missing_citation")
@@ -112,7 +115,7 @@ def score(task: dict, tr: dict) -> dict:
 
     # 答案关键信息
     if task.get("answer_contains_any"):
-        hit = any(x in answer for x in task["answer_contains_any"])
+        hit = any(x in expand_units(answer) for x in task["answer_contains_any"])
         checks["answer"] = hit
         if not hit:
             labels.append("answer_mismatch")
@@ -121,6 +124,15 @@ def score(task: dict, tr: dict) -> dict:
 
     success = tr["stop_reason"] == "answered" and all(v is not False for v in checks.values())
     return {"success": success, "checks": checks, "labels": labels, "called": called}
+
+
+def expand_units(text: str) -> str:
+    """把中文数量单位换算成英文财报写法附在原文后，例如 45 亿 -> 4.5（billion），157.6 万 -> 1,576,000。"""
+    extra = []
+    for m in re.finditer(r"(\d+(?:\.\d+)?)\s*(亿|万)", text):
+        v = float(m.group(1)) * (1e8 if m.group(2) == "亿" else 1e4)
+        extra += [f"{v / 1e9:g}", f"{v / 1e6:g}", f"{v:,.0f}"]
+    return text + ("\n" + " ".join(extra) if extra else "")
 
 
 def summarize(rows: list[dict]) -> dict:
