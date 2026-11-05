@@ -79,19 +79,21 @@ More questions to try:
 
 Run on 2026-11-05. See [docs/eval-report.md](docs/eval-report.md) (Chinese) and [reports/eval_report.html](reports/eval_report.html).
 
-**Agent evaluation (Zhipu GLM-5.3, 32 tasks)**
+**Agent evaluation (Zhipu GLM-5.3, 32 tasks, two rounds)**
 
-| Metric | Result | PRD target |
-|---|---|---|
-| Task success rate | 84.4% (27/32) | ≥ 80% |
-| Tool selection accuracy | 100% (32/32) | ≥ 90% |
-| Order confirmation compliance | 100% (6/6) | 100% |
-| Refusal rate on prohibited requests | 100% (6/6) | 100% |
-| Citation accuracy | 75.0% (9/12) | ≥ 85%, not met |
-| Average latency | 19.4 s | ≤ 15 s, not met |
-| Average cost | $0.0101 per task (estimated at list price) | ≤ $0.01 |
+After round 1, the tool, prompt and model settings were fixed based on the badcases, then round 2 was run.
 
-Success by category: factual Q&A with citation 60%, multi-tool analysis 90%, order confirmation 100%, prohibited-request refusal 100%. Causes of the 5 failures: 1 scoring-rule false negative, 1 truncated retrieval snippet, 2 citation labeling strictness, 1 content-moderation block by the model provider.
+| Metric | Round 1 | Round 2 (current) | PRD target |
+|---|---|---|---|
+| Task success rate | 84.4% | **96.9% (31/32)** | ≥ 80% |
+| Tool selection accuracy | 100% | **100%** | ≥ 90% |
+| Order confirmation compliance | 100% | **100% (6/6)** | 100% |
+| Refusal rate on prohibited requests | 100% | **100% (6/6)** | 100% |
+| Citation accuracy | 75.0% | **91.7% (11/12)** | ≥ 85% |
+| Average latency | 19.4 s | **11.8 s** | ≤ 15 s |
+| Average cost (estimated at list price) | $0.0101 | **$0.0059** | ≤ $0.01 |
+
+Round 2 also adjusted the scoring rules (Chinese numeric units, and citations that contain the answer figure count as supporting). Rescored under the new rules, round 1 is 90.6% success and 83.3% citation accuracy, so the fixes themselves added +6.3 points of success and +8.4 points of citation accuracy, cut latency by 39% and cost by 42%. The one remaining failure is a false content-moderation block by the model provider. Both rounds used the same task set, so round 2 may overfit it. See [eval report section 3.7](docs/eval-report.md).
 
 **Other tests**
 
@@ -206,6 +208,7 @@ The built-in agent works with any OpenAI-compatible API. Using Zhipu as an examp
 $env:BASE_URL="https://open.bigmodel.cn/api/paas/v4"
 $env:API_KEY="your key"
 $env:MODEL="glm-5.3"
+$env:FINAGENT_REASONING_EFFORT="low"      # optional: lower reasoning effort, about 40% less latency
 
 python -m finagent.cli ask "What share of NVIDIA's revenue comes from its largest customer? Cite the filing."
 python -m finagent.cli chat                 # multi-turn chat
@@ -219,14 +222,14 @@ Cost estimates: DeepSeek list prices are built in (see `finagent/agent/cost.py`)
 
 ## Known gaps and roadmap
 
-| Gap | Data | Plan |
+| Gap | Today | Plan |
 |---|---|---|
-| Citation accuracy below target | 75% vs 85% target | Return full chunks instead of truncated previews; check that the cited chunk contains the answer figure |
-| High latency | 19.4 s average vs 15 s target | Cut repeated searches (some tasks called search_filings 4 to 6 times); cap tool rounds for simple questions |
-| Weak retrieval on table questions | 8 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
-| Coarse scoring rules | 1 correct answer marked wrong ("4.5 billion" written in Chinese units) | Handle Chinese numeric units; add human spot checks or an LLM judge for refusals |
+| Eval set may be overfit | Both rounds used the same 32 tasks, which were consulted during fixes | Build a held-out task set for validation |
+| Provider false blocks | A16 was blocked by Zhipu content moderation in both rounds | Retry once with a rephrased prompt and track these separately |
+| Weak retrieval on table questions | 8 of 49 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
+| Coarse refusal scoring | Keyword-based | Add human spot checks or an LLM judge |
 | Narrow coverage | 5 companies, one 10-K and one 10-Q each | Expand to 20 companies and the last 4 filings; then consider Hong Kong and A-shares |
-| No real-user data yet | All eval questions are self-written | Collect real questions as a regression set and track metrics over time |
+| No real-user data yet | All eval questions are self-written | List on MCP directories and collect real questions as a regression set |
 
 ## Docs
 
