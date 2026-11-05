@@ -5,6 +5,7 @@
     python eval/agent_eval.py                 # 跑全部 32 个任务
     python eval/agent_eval.py --limit 5       # 先跑 5 个试一下
     python eval/agent_eval.py --ids A01,A21
+    python eval/agent_eval.py --tasks eval/agent_tasks_holdout.jsonl --out eval/results/agent_eval_holdout.json
 """
 from __future__ import annotations
 
@@ -31,8 +32,9 @@ def norm(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip().lower()
 
 
-def load_tasks() -> list[dict]:
-    return [json.loads(l) for l in (ROOT / "eval/agent_tasks.jsonl").read_text(encoding="utf-8").splitlines() if l]
+def load_tasks(path: str | None = None) -> list[dict]:
+    p = Path(path) if path else ROOT / "eval/agent_tasks.jsonl"
+    return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l]
 
 
 def score(task: dict, tr: dict) -> dict:
@@ -178,12 +180,13 @@ def main(argv=None) -> dict:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int)
     ap.add_argument("--ids")
+    ap.add_argument("--tasks", help="任务文件，默认 eval/agent_tasks.jsonl；验证集用 eval/agent_tasks_holdout.jsonl")
     ap.add_argument("--out", default=str(ROOT / "eval/results/agent_eval.json"))
     args = ap.parse_args(argv)
 
     from finagent.agent.llm import OpenAICompatLLM
     llm = OpenAICompatLLM()
-    tasks = load_tasks()
+    tasks = load_tasks(args.tasks)
     if args.ids:
         keep = set(args.ids.split(","))
         tasks = [t for t in tasks if t["id"] in keep]
