@@ -1,25 +1,35 @@
-# AlphaDesk: A US Equity Research Agent
+# AlphaDesk
+
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](eval/results/pytest.txt)
 
 [中文](README.md) | **English**
 
-AlphaDesk is a US equity research agent that ships 7 financial tools as an MCP server. Once connected to an MCP client such as Claude Desktop, Claude Code, Cursor or Cherry Studio, you can check quotes, search SEC filings with citations, measure portfolio risk and draft simulated orders. Orders are only drafted. A human must confirm them.
+**Lets Claude, Cursor and other AI clients check US stock quotes and answer from SEC filings with the source passage cited. "Buy this" only drafts a simulated order that a human must confirm.**
 
-It covers NVDA, MSFT, AAPL, TSLA and AMZN, with QQQ as the benchmark. It does not connect to any broker, never places real trades, and its output is not investment advice.
+![AlphaDesk demo: ask about NVIDIA's largest customer, get a cited answer; an order request drafts a simulated order that waits for human confirmation](docs/assets/demo-en.gif)
 
-## In one sentence
+On 24 held-out tasks not used during tuning: task success **91.7%**, citation accuracy **88.9%**, about **$0.006 per question** (estimated at the model's list price). Details in the [evaluation report](docs/eval-report.md).
 
-Think of AlphaDesk as a research assistant that reads filings. Ask "What share of NVIDIA's revenue comes from its largest customer?" and it finds the sentence in the 10-K, answers 22%, and tells you which passage it came from so you can check it. Say "Buy 10 shares of Apple" and it fills in a simulated order ticket. Whether to press confirm is your call.
+Covers NVDA, MSFT, AAPL, TSLA and AMZN, with QQQ as the benchmark. No broker connection, no real trades, not investment advice.
 
-Key terms:
+## Quick start (uvx, no clone)
 
-| Term | Plain meaning |
-|---|---|
-| Agent | An AI assistant that decides on its own what to look up first and what next, instead of only chatting |
-| MCP | A common plug standard. Because AlphaDesk is built as this plug, apps like Claude and Cursor can use its 7 tools once plugged in |
-| RAG (retrieval-augmented generation) | Search the source documents first, then let the AI answer from the retrieved text, which reduces made-up answers |
-| Citation `[chunk_id]` | The tag after an answer that points to a specific passage in the filing, for verification |
-| Human confirmation | For anything involving money, the AI can only submit a request. A person makes the final call |
-| Evaluation | 32 test questions that score the AI automatically and show in numbers where it does well and where it falls short |
+With [uv](https://docs.astral.sh/uv/) and Git installed, add this to your MCP client config (works for Claude Desktop, Cursor, Cherry Studio). The first launch downloads the code, dependencies and data snapshot. No API key needed:
+
+```json
+{
+  "mcpServers": {
+    "alphadesk": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
+    }
+  }
+}
+```
+
+Simulated orders and the search index are stored in `~/.alphadesk`. Set `FINAGENT_HOME` to change it.
+
+You can also copy the config from [ModelScope MCP](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk), or download `alphadesk.mcpb` from the [latest release](https://github.com/TTNAN/AlphaDesk/releases/latest) for one-click install in Claude Desktop.
 
 ## Examples
 
@@ -66,6 +76,45 @@ More questions to try:
 - How much did TSLA move over the last 30 trading days, and what's the latest news?
 - Note that my risk preference is conservative and I hold 200 shares of AAPL. (Later, "check my portfolio risk" uses these holdings automatically.)
 
+## In plain words
+
+Think of AlphaDesk as a research assistant that reads filings. Ask "What share of NVIDIA's revenue comes from its largest customer?" and it finds the sentence in the 10-K, answers 22%, and tells you which passage it came from so you can check it. Say "Buy 10 shares of Apple" and it fills in a simulated order ticket. Whether to press confirm is your call.
+
+
+<details>
+<summary><b>Glossary</b></summary>
+
+| Term | Plain meaning |
+|---|---|
+| Agent | An AI assistant that decides on its own what to look up first and what next, instead of only chatting |
+| MCP | A common plug standard. Because AlphaDesk is built as this plug, apps like Claude and Cursor can use its 7 tools once plugged in |
+| RAG (retrieval-augmented generation) | Search the source documents first, then let the AI answer from the retrieved text, which reduces made-up answers |
+| Citation `[chunk_id]` | The tag after an answer that points to a specific passage in the filing, for verification |
+| Human confirmation | For anything involving money, the AI can only submit a request. A person makes the final call |
+| Evaluation | 32 test questions that score the AI automatically and show in numbers where it does well and where it falls short |
+
+</details>
+
+## The 7 tools
+
+| Tool | What it does | Example question |
+|---|---|---|
+| `get_quote` | Latest quote, change, 52-week high and low | How far is NVDA from its 52-week high? |
+| `get_price_history` | Last N trading days and period return | How much has TSLA moved in 30 days? |
+| `get_company_news` | Latest company news | Any recent Microsoft news? |
+| `search_filings` | Search 10-K / 10-Q, return tagged source passages | What share of revenue is NVIDIA's largest customer? |
+| `get_key_financials` | SEC XBRL financials (revenue, net income, cash flow, capex, etc.) | Compare MSFT and AMZN revenue over two years |
+| `portfolio_risk` | Volatility, max drawdown, beta vs QQQ, concentration | I hold NVDA 60% and TSLA 40%. How risky is that? |
+| `draft_order` | Draft a simulated order pending confirmation | Buy 10 shares of AAPL |
+
+## Safety design
+
+- `draft_order` returns only an order ID and the status `PENDING_CONFIRMATION`. The confirmation token never appears in any output the model can see.
+- Only the user can confirm, by running `python -m finagent.orders confirm ORDER_ID` in a local terminal.
+- Extra checks: ticker whitelist, positive whole-share quantity, limit orders need a price, $100,000 cap per order, pending orders expire after 10 minutes.
+- There is no real trading path anywhere in the code.
+- The model refuses prohibited requests (guaranteed returns, insider information, price manipulation): 6/6 passed in the eval.
+
 ## Problems it addresses
 
 | Problem | Today | What AlphaDesk does |
@@ -76,6 +125,9 @@ More questions to try:
 | No way to tell how well the agent performs | No reproducible measurement | 32 eval tasks with automatic success rate, tool selection, citation, compliance, latency, cost and badcase labels |
 
 ## Measured results
+
+<details>
+<summary><b>Full results (32 dev tasks, 24 held-out tasks, retrieval and unit tests)</b></summary>
 
 Run on 2026-11-05. See [docs/eval-report.md](docs/eval-report.md) (Chinese) and [reports/eval_report.html](reports/eval_report.html).
 
@@ -115,66 +167,23 @@ Holdout failures: one missed the quarterly 10-Q data and wrongly said the figure
 
 The retrieval questions were written by the same person who read the filings, so scores may be higher than for real user questions.
 
-## The 7 tools
+</details>
 
-| Tool | What it does | Example question |
+## Known gaps and roadmap
+
+| Gap | Today | Plan |
 |---|---|---|
-| `get_quote` | Latest quote, change, 52-week high and low | How far is NVDA from its 52-week high? |
-| `get_price_history` | Last N trading days and period return | How much has TSLA moved in 30 days? |
-| `get_company_news` | Latest company news | Any recent Microsoft news? |
-| `search_filings` | Search 10-K / 10-Q, return tagged source passages | What share of revenue is NVIDIA's largest customer? |
-| `get_key_financials` | SEC XBRL financials (revenue, net income, cash flow, capex, etc.) | Compare MSFT and AMZN revenue over two years |
-| `portfolio_risk` | Volatility, max drawdown, beta vs QQQ, concentration | I hold NVDA 60% and TSLA 40%. How risky is that? |
-| `draft_order` | Draft a simulated order pending confirmation | Buy 10 shares of AAPL |
+| Quarter-specific questions can miss the 10-Q | Holdout H06: retrieval returned only 10-K chunks | Filter to 10-Q when a question names a quarter; say "not found" instead of "not disclosed" |
+| Provider false blocks | A16 was blocked by Zhipu content moderation in both rounds | Retry once with a rephrased prompt and track these separately |
+| Weak retrieval on table questions | 8 of 49 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
+| Coarse refusal scoring | Keyword-based | Add human spot checks or an LLM judge |
+| Narrow coverage | 5 companies, one 10-K and one 10-Q each | Expand to 20 companies and the last 4 filings; then consider Hong Kong and A-shares |
+| No real-user data yet | All eval questions are self-written | List on MCP directories and collect real questions as a regression set |
 
-## Architecture
+<details>
+<summary><b>Other setups: clone install, client configs, CLI and evaluation</b></summary>
 
-```mermaid
-flowchart LR
-    C[Claude Desktop / Claude Code / Cursor / Cherry Studio] -->|MCP stdio| M[mcp_server.py]
-    U[User / advisor] -->|CLI| A[Agent loop]
-    A -->|function calling| L[(OpenAI-compatible model<br/>Zhipu GLM / DeepSeek / Qwen / Kimi)]
-    M --> R[Shared tool layer]
-    A --> R
-    A --> MEM[Memory<br/>short-term window + user profile]
-    R --> Q[Quotes / news]
-    R --> S[Filing search<br/>BM25 + chunk citations]
-    R --> F[XBRL financials]
-    R --> P[Portfolio risk]
-    R --> O[Simulated orders]
-    O --> G{Human confirmation}
-    Q & S & F --> CACHE[(Local data snapshot)]
-    CACHE -.optional online refresh.- SRC[Yahoo Finance / SEC EDGAR / Eastmoney]
-    A --> T[(JSONL traces)]
-    T --> REP[Eval report]
-```
-
-## Safety design
-
-- `draft_order` returns only an order ID and the status `PENDING_CONFIRMATION`. The confirmation token never appears in any output the model can see.
-- Only the user can confirm, by running `python -m finagent.orders confirm ORDER_ID` in a local terminal.
-- Extra checks: ticker whitelist, positive whole-share quantity, limit orders need a price, $100,000 cap per order, pending orders expire after 10 minutes.
-- There is no real trading path anywhere in the code.
-- The model refuses prohibited requests (guaranteed returns, insider information, price manipulation): 6/6 passed in the eval.
-
-## Quick start (uvx, no clone)
-
-With [uv](https://docs.astral.sh/uv/) and Git installed, add this to your MCP client config (works for Claude Desktop, Cursor, Cherry Studio). The first launch downloads the code, dependencies and data snapshot. No API key needed:
-
-```json
-{
-  "mcpServers": {
-    "alphadesk": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
-    }
-  }
-}
-```
-
-Simulated orders and the search index are stored in `~/.alphadesk`. Set `FINAGENT_HOME` to change it.
-
-## Install (Windows)
+### Install (Windows)
 
 Requires Python 3.10+ and Git. In PowerShell:
 
@@ -191,7 +200,7 @@ On macOS / Linux, replace `.venv\Scripts\activate` with `source .venv/bin/activa
 
 A data snapshot (about 3.3 MB) is committed with the repo: prices through the 2026-11-04 close, and each company's latest 10-K and 10-Q as of 2026-11-05. It runs offline by default. All tools work with no network and no API key.
 
-## Connect an MCP client
+### Connect an MCP client
 
 The examples assume the repo is at `C:\AlphaDesk`. Replace it with your path. In MCP mode the client's own model calls the tools, so AlphaDesk needs no API key.
 
@@ -226,7 +235,7 @@ python -m finagent.orders list
 python -m finagent.orders confirm SIM-XXXXXXXX
 ```
 
-## CLI chat and evaluation (needs a model API key)
+### CLI chat and evaluation (needs a model API key)
 
 The built-in agent works with any OpenAI-compatible API. Using Zhipu as an example:
 
@@ -246,16 +255,7 @@ Other providers: DeepSeek `https://api.deepseek.com`, Qwen `https://dashscope.al
 
 Cost estimates: DeepSeek list prices are built in (see `finagent/agent/cost.py`). For other models set `FINAGENT_PRICE_INPUT_PER_M` and `FINAGENT_PRICE_OUTPUT_PER_M` (USD per million tokens). Without them only token counts are recorded.
 
-## Known gaps and roadmap
-
-| Gap | Today | Plan |
-|---|---|---|
-| Quarter-specific questions can miss the 10-Q | Holdout H06: retrieval returned only 10-K chunks | Filter to 10-Q when a question names a quarter; say "not found" instead of "not disclosed" |
-| Provider false blocks | A16 was blocked by Zhipu content moderation in both rounds | Retry once with a rephrased prompt and track these separately |
-| Weak retrieval on table questions | 8 of 49 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
-| Coarse refusal scoring | Keyword-based | Add human spot checks or an LLM judge |
-| Narrow coverage | 5 companies, one 10-K and one 10-Q each | Expand to 20 companies and the last 4 filings; then consider Hong Kong and A-shares |
-| No real-user data yet | All eval questions are self-written | List on MCP directories and collect real questions as a regression set |
+</details>
 
 ## Docs
 
@@ -265,7 +265,37 @@ Cost estimates: DeepSeek list prices are built in (see `finagent/agent/cost.py`)
 | [docs/eval-report.md](docs/eval-report.md) | Eval method, metric definitions, full results, badcase analysis, scoring limits (Chinese) |
 | [reports/eval_report.html](reports/eval_report.html) | Visual report with the call trace of each eval task |
 
+## Architecture
+
+<details>
+<summary><b>Architecture diagram</b></summary>
+
+```mermaid
+flowchart LR
+    C[Claude Desktop / Claude Code / Cursor / Cherry Studio] -->|MCP stdio| M[mcp_server.py]
+    U[User / advisor] -->|CLI| A[Agent loop]
+    A -->|function calling| L[(OpenAI-compatible model<br/>Zhipu GLM / DeepSeek / Qwen / Kimi)]
+    M --> R[Shared tool layer]
+    A --> R
+    A --> MEM[Memory<br/>short-term window + user profile]
+    R --> Q[Quotes / news]
+    R --> S[Filing search<br/>BM25 + chunk citations]
+    R --> F[XBRL financials]
+    R --> P[Portfolio risk]
+    R --> O[Simulated orders]
+    O --> G{Human confirmation}
+    Q & S & F --> CACHE[(Local data snapshot)]
+    CACHE -.optional online refresh.- SRC[Yahoo Finance / SEC EDGAR / Eastmoney]
+    A --> T[(JSONL traces)]
+    T --> REP[Eval report]
+```
+
+</details>
+
 ## Layout
+
+<details>
+<summary><b>Repository layout</b></summary>
 
 ```
 finagent/
@@ -281,6 +311,8 @@ tests/                 41 unit tests
 docs/                  PRD, eval report
 data/cache/            offline data snapshot
 ```
+
+</details>
 
 ## Data sources
 

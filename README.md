@@ -1,25 +1,35 @@
-# AlphaDesk：美股投研 Agent
+# AlphaDesk
+
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](eval/results/pytest.txt)
 
 **中文** | [English](README.en.md)
 
-AlphaDesk 是一个美股投研 Agent，以 MCP Server 的形式提供 7 个金融工具。接入 Claude Desktop、Claude Code、Cursor、Cherry Studio 等支持 MCP 的客户端后，可以用中文查询行情、检索 SEC 财报并附出处、计算组合风险、生成模拟订单。下单只生成待确认订单，必须由人确认。
+**让 Claude、Cursor 等 AI 客户端查美股行情、从 SEC 财报原文里找答案并标出处；说"帮我买"只生成模拟订单，必须由人确认。**
 
-覆盖 NVDA、MSFT、AAPL、TSLA、AMZN 五家公司，QQQ 作为基准。本项目不连接券商，不执行真实交易，输出不构成投资建议。
+![AlphaDesk 演示：问英伟达最大客户，带引用回答；下单生成模拟订单，等待人工确认](docs/assets/demo.gif)
 
-## 用一句话说
+在 24 道未参与调试的验证题上：任务成功率 **91.7%**，引用准确率 **88.9%**，每次问答约 **0.006 美元**（按模型官方标价估算）。细节见[评测报告](docs/eval-report.md)。
 
-把 AlphaDesk 想成一位会查财报的研究助理：你问"英伟达最大客户占营收多少"，它去 10-K 原文里找到那句话，告诉你答案 22%，并标出是第几段，你可以自己核对。你说"帮我买 10 股苹果"，它只帮你填好一张模拟订单，按不按确认键由你决定。
+覆盖 NVDA、MSFT、AAPL、TSLA、AMZN，QQQ 作为基准。不连接券商，不执行真实交易，输出不构成投资建议。
 
-几个名词的意思：
+## 最快接入（uvx，免克隆）
 
-| 名词 | 通俗解释 |
-|---|---|
-| Agent | 能自己决定先查什么、再查什么的 AI 助手，而不是只会聊天 |
-| MCP | 一种通用插头标准。AlphaDesk 做成这个插头后，Claude、Cursor 等 AI 应用插上就能用这 7 个工具 |
-| RAG（检索增强生成） | 先在资料里搜到相关原文，再让 AI 根据原文回答，减少编造 |
-| 引用 `[chunk_id]` | 答案后面的编号，对应财报里的具体段落，用来核对 |
-| 人工确认 | 涉及钱的动作，AI 只能提交申请，最后一步必须由人点头 |
-| 评测 | 准备 32 道考题，自动给 AI 打分，用数字说明它哪里好、哪里差 |
+装好 [uv](https://docs.astral.sh/uv/) 和 Git 后，把下面这段写进 MCP 客户端配置（Claude Desktop、Cursor、Cherry Studio 通用）。首次启动会自动下载代码、依赖和数据快照，不需要 API key：
+
+```json
+{
+  "mcpServers": {
+    "alphadesk": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
+    }
+  }
+}
+```
+
+模拟订单和检索索引保存在 `~/.alphadesk`（Windows 为 `C:\Users\你的用户名\.alphadesk`），可用环境变量 `FINAGENT_HOME` 改位置。
+
+也可以从[魔搭 MCP 广场](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk)复制配置，或在 [Release](https://github.com/TTNAN/AlphaDesk/releases/latest) 下载 `alphadesk.mcpb` 一键安装到 Claude Desktop。
 
 ## 使用示例
 
@@ -66,6 +76,44 @@ AlphaDesk 是一个美股投研 Agent，以 MCP Server 的形式提供 7 个金�
 - TSLA 最近 30 个交易日涨跌了多少，最近有什么新闻？
 - 记一下：我的风险偏好是保守型，持仓是 AAPL 200 股。（之后问"看看我的组合风险"会自动用这份持仓）
 
+## 通俗理解
+
+把 AlphaDesk 想成一位会查财报的研究助理：你问"英伟达最大客户占营收多少"，它去 10-K 原文里找到那句话，告诉你答案 22%，并标出是第几段，你可以自己核对。你说"帮我买 10 股苹果"，它只帮你填好一张模拟订单，按不按确认键由你决定。
+
+<details>
+<summary><b>名词解释</b></summary>
+
+| 名词 | 通俗解释 |
+|---|---|
+| Agent | 能自己决定先查什么、再查什么的 AI 助手，而不是只会聊天 |
+| MCP | 一种通用插头标准。AlphaDesk 做成这个插头后，Claude、Cursor 等 AI 应用插上就能用这 7 个工具 |
+| RAG（检索增强生成） | 先在资料里搜到相关原文，再让 AI 根据原文回答，减少编造 |
+| 引用 `[chunk_id]` | 答案后面的编号，对应财报里的具体段落，用来核对 |
+| 人工确认 | 涉及钱的动作，AI 只能提交申请，最后一步必须由人点头 |
+| 评测 | 准备 32 道考题，自动给 AI 打分，用数字说明它哪里好、哪里差 |
+
+</details>
+
+## 7 个工具
+
+| 工具 | 作用 | 示例提问 |
+|---|---|---|
+| `get_quote` | 最新报价、涨跌、52 周高低点 | NVDA 离 52 周高点还差多少？ |
+| `get_price_history` | 最近 N 个交易日行情和区间涨跌 | TSLA 最近 30 天涨了多少？ |
+| `get_company_news` | 公司最新新闻 | 微软最近有什么新闻？ |
+| `search_filings` | 在 10-K / 10-Q 中检索，返回带编号的原文片段 | 英伟达最大客户占营收多少？ |
+| `get_key_financials` | SEC XBRL 结构化财务数据（营收、净利润、现金流、资本开支等） | 对比 MSFT 和 AMZN 近两年营收 |
+| `portfolio_risk` | 组合波动率、最大回撤、相对 QQQ 的 beta、集中度 | 我持有 NVDA 60%、TSLA 40%，风险如何？ |
+| `draft_order` | 生成待确认的模拟订单 | 帮我买 10 股 AAPL |
+
+## 安全设计
+
+- `draft_order` 只返回订单号和状态 `PENDING_CONFIRMATION`，确认令牌不出现在模型可见的任何输出中。
+- 确认只能由用户在本地终端执行 `python -m finagent.orders confirm 订单号`。
+- 额外校验：股票代码白名单、数量为正整数、限价单必须给价格、单笔名义金额上限 10 万美元、待确认订单 10 分钟过期。
+- 代码中没有任何真实交易路径。
+- 违规请求（保证收益、内幕消息、操纵股价）由模型拒答，评测中 6/6 通过。
+
 ## 解决的问题
 
 | 问题 | 现状 | AlphaDesk 的做法 |
@@ -76,6 +124,9 @@ AlphaDesk 是一个美股投研 Agent，以 MCP Server 的形式提供 7 个金�
 | 不知道 Agent 表现好不好 | 缺少可复现的衡量方法 | 32 个评测任务，自动统计成功率、工具选择、引用、合规、延迟、成本，并给出 badcase 分类 |
 
 ## 实测结果
+
+<details>
+<summary><b>实测结果详情（开发集 32 题、验证集 24 题、检索与单元测试）</b></summary>
 
 2026-11-05 实际运行，详见 [docs/eval-report.md](docs/eval-report.md) 和 [reports/eval_report.html](reports/eval_report.html)。
 
@@ -115,66 +166,23 @@ AlphaDesk 是一个美股投研 Agent，以 MCP Server 的形式提供 7 个金�
 
 检索评测题由同一人阅读财报后编写，分数可能高于真实用户提问。
 
-## 7 个工具
+</details>
 
-| 工具 | 作用 | 示例提问 |
+## 已知不足与改进计划
+
+| 不足 | 现状 | 计划 |
 |---|---|---|
-| `get_quote` | 最新报价、涨跌、52 周高低点 | NVDA 离 52 周高点还差多少？ |
-| `get_price_history` | 最近 N 个交易日行情和区间涨跌 | TSLA 最近 30 天涨了多少？ |
-| `get_company_news` | 公司最新新闻 | 微软最近有什么新闻？ |
-| `search_filings` | 在 10-K / 10-Q 中检索，返回带编号的原文片段 | 英伟达最大客户占营收多少？ |
-| `get_key_financials` | SEC XBRL 结构化财务数据（营收、净利润、现金流、资本开支等） | 对比 MSFT 和 AMZN 近两年营收 |
-| `portfolio_risk` | 组合波动率、最大回撤、相对 QQQ 的 beta、集中度 | 我持有 NVDA 60%、TSLA 40%，风险如何？ |
-| `draft_order` | 生成待确认的模拟订单 | 帮我买 10 股 AAPL |
+| 问具体季度时可能检索不到 10-Q | 验证集 H06 只检索到 10-K 片段 | 问题含季度时优先检索 10-Q；检索不到时回答"未检索到"，不说"未披露" |
+| 模型服务误拦截 | A16 两轮都被智谱内容审核拦截 | 对这类错误改写重试一次，并单独统计 |
+| 表格类问题检索弱 | 49 道检索题中 8 道未进前 5，多与财务报表表格有关 | 表格片段单独标记并降权；加入 embedding 混合检索 |
+| 拒答判断较粗 | 基于关键词判断 | 加入人工抽检或模型评审 |
+| 覆盖范围小 | 5 家公司，各 1 期 10-K 和 10-Q | 扩到 20 家公司、最近 4 期财报；之后考虑港股和 A 股 |
+| 缺少真实用户数据 | 评测题均为自建 | 上架 MCP 目录，收集真实提问作为回归集 |
 
-## 架构
+<details>
+<summary><b>其他接入方式：克隆安装、各客户端配置、命令行与评测</b></summary>
 
-```mermaid
-flowchart LR
-    C[Claude Desktop / Claude Code / Cursor / Cherry Studio] -->|MCP stdio| M[mcp_server.py]
-    U[用户 / 投顾] -->|命令行| A[Agent 主循环]
-    A -->|function calling| L[(OpenAI 兼容模型<br/>智谱 GLM / DeepSeek / Qwen / Kimi)]
-    M --> R[统一工具层]
-    A --> R
-    A --> MEM[记忆<br/>短期窗口 + 用户画像]
-    R --> Q[行情 / 新闻]
-    R --> S[财报检索<br/>BM25 + 片段引用]
-    R --> F[XBRL 财务数据]
-    R --> P[组合风险]
-    R --> O[模拟订单]
-    O --> G{人工确认}
-    Q & S & F --> CACHE[(本地数据快照)]
-    CACHE -.可选在线刷新.- SRC[Yahoo Finance / SEC EDGAR / 东方财富]
-    A --> T[(JSONL 轨迹)]
-    T --> REP[评测报告]
-```
-
-## 安全设计
-
-- `draft_order` 只返回订单号和状态 `PENDING_CONFIRMATION`，确认令牌不出现在模型可见的任何输出中。
-- 确认只能由用户在本地终端执行 `python -m finagent.orders confirm 订单号`。
-- 额外校验：股票代码白名单、数量为正整数、限价单必须给价格、单笔名义金额上限 10 万美元、待确认订单 10 分钟过期。
-- 代码中没有任何真实交易路径。
-- 违规请求（保证收益、内幕消息、操纵股价）由模型拒答，评测中 6/6 通过。
-
-## 最快接入（uvx，免克隆）
-
-装好 [uv](https://docs.astral.sh/uv/) 和 Git 后，把下面这段写进 MCP 客户端配置（Claude Desktop、Cursor、Cherry Studio 通用）。首次启动会自动下载代码、依赖和数据快照，不需要 API key：
-
-```json
-{
-  "mcpServers": {
-    "alphadesk": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
-    }
-  }
-}
-```
-
-模拟订单和检索索引保存在 `~/.alphadesk`（Windows 为 `C:\Users\你的用户名\.alphadesk`），可用环境变量 `FINAGENT_HOME` 改位置。
-
-## 安装（Windows）
+### 安装（Windows）
 
 需要 Python 3.10 及以上和 Git。在 PowerShell 中执行：
 
@@ -191,7 +199,7 @@ macOS / Linux 把 `.venv\Scripts\activate` 换成 `source .venv/bin/activate`，
 
 数据快照（约 3.3 MB）已随仓库提交：行情截至 2026-11-04 收盘，财报为截至 2026-11-05 的最新一期 10-K 和 10-Q。默认离线运行，不需要联网和 API key 就能使用全部工具。
 
-## 接入 MCP 客户端
+### 接入 MCP 客户端
 
 以下示例假设仓库在 `C:\AlphaDesk`，请换成你的实际路径。MCP 模式下由客户端自己的模型调用工具，不需要在 AlphaDesk 里配置 API key。
 
@@ -226,7 +234,7 @@ python -m finagent.orders list
 python -m finagent.orders confirm SIM-XXXXXXXX
 ```
 
-## 命令行对话和评测（需要模型 API key）
+### 命令行对话和评测（需要模型 API key）
 
 AlphaDesk 自带的 Agent 支持任何 OpenAI 兼容接口。以智谱为例：
 
@@ -246,16 +254,7 @@ python scripts\build_report.py              # 生成 reports\eval_report.html
 
 成本估算：DeepSeek 官方价格已内置（见 `finagent/agent/cost.py`）。其他模型设置 `FINAGENT_PRICE_INPUT_PER_M` 和 `FINAGENT_PRICE_OUTPUT_PER_M`（美元/百万 tokens），未设置时只记录 token 数。
 
-## 已知不足与改进计划
-
-| 不足 | 现状 | 计划 |
-|---|---|---|
-| 问具体季度时可能检索不到 10-Q | 验证集 H06 只检索到 10-K 片段 | 问题含季度时优先检索 10-Q；检索不到时回答"未检索到"，不说"未披露" |
-| 模型服务误拦截 | A16 两轮都被智谱内容审核拦截 | 对这类错误改写重试一次，并单独统计 |
-| 表格类问题检索弱 | 49 道检索题中 8 道未进前 5，多与财务报表表格有关 | 表格片段单独标记并降权；加入 embedding 混合检索 |
-| 拒答判断较粗 | 基于关键词判断 | 加入人工抽检或模型评审 |
-| 覆盖范围小 | 5 家公司，各 1 期 10-K 和 10-Q | 扩到 20 家公司、最近 4 期财报；之后考虑港股和 A 股 |
-| 缺少真实用户数据 | 评测题均为自建 | 上架 MCP 目录，收集真实提问作为回归集 |
+</details>
 
 ## 文档
 
@@ -265,7 +264,37 @@ python scripts\build_report.py              # 生成 reports\eval_report.html
 | [docs/eval-report.md](docs/eval-report.md) | 评测方法、指标定义、全部结果、badcase 分析、评分方法的局限 |
 | [reports/eval_report.html](reports/eval_report.html) | 可视化报告，含每个评测任务的调用轨迹 |
 
+## 架构
+
+<details>
+<summary><b>架构图</b></summary>
+
+```mermaid
+flowchart LR
+    C[Claude Desktop / Claude Code / Cursor / Cherry Studio] -->|MCP stdio| M[mcp_server.py]
+    U[用户 / 投顾] -->|命令行| A[Agent 主循环]
+    A -->|function calling| L[(OpenAI 兼容模型<br/>智谱 GLM / DeepSeek / Qwen / Kimi)]
+    M --> R[统一工具层]
+    A --> R
+    A --> MEM[记忆<br/>短期窗口 + 用户画像]
+    R --> Q[行情 / 新闻]
+    R --> S[财报检索<br/>BM25 + 片段引用]
+    R --> F[XBRL 财务数据]
+    R --> P[组合风险]
+    R --> O[模拟订单]
+    O --> G{人工确认}
+    Q & S & F --> CACHE[(本地数据快照)]
+    CACHE -.可选在线刷新.- SRC[Yahoo Finance / SEC EDGAR / 东方财富]
+    A --> T[(JSONL 轨迹)]
+    T --> REP[评测报告]
+```
+
+</details>
+
 ## 目录结构
+
+<details>
+<summary><b>目录结构</b></summary>
 
 ```
 finagent/
@@ -281,6 +310,8 @@ tests/                 41 项单元测试
 docs/                  PRD、评测报告
 data/cache/            离线数据快照
 ```
+
+</details>
 
 ## 数据源
 
