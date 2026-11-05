@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphadesk"
+version = "0.1.0"
+description = "AlphaDesk: US equity research agent with an MCP server (SEC filings RAG with citations, prices, risk, simulated orders with human confirmation)"
+readme = "README.en.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+  "mcp>=1.2",
+  "openai>=1.40",
+  "rank-bm25>=0.2.2",
+  "requests>=2.31",
+  "beautifulsoup4>=4.12",
+  "lxml>=5.0",
+  "numpy>=1.26",
+]
+
+[project.urls]
+Homepage = "https://github.com/TTNAN/AlphaDesk"
+
+[project.scripts]
+alphadesk-mcp = "finagent.mcp_server:main"
+
+[tool.setuptools]
+packages = ["finagent", "finagent.agent", "finagent.rag", "finagent.tools", "finagent._data"]
+
+[tool.setuptools.package-dir]
+"finagent._data" = "data"
+
+[tool.setuptools.package-data]
+"finagent._data" = ["cache/*/*"]

@@ -5,15 +5,29 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = ROOT / "data"
-CACHE_DIR = DATA_DIR / "cache"
+_PKG = Path(__file__).resolve().parent
+
+# 两种运行方式：
+# 1) 克隆仓库运行：数据在仓库 data/ 下。
+# 2) pip / uvx 安装运行：只读缓存随包安装在 finagent/_data/cache，
+#    可写文件（索引、模拟订单、trace）放到 FINAGENT_HOME，默认 ~/.alphadesk。
+if (ROOT / "data" / "cache").is_dir() and not os.getenv("FINAGENT_HOME"):
+    DATA_DIR = ROOT / "data"
+    CACHE_DIR = DATA_DIR / "cache"
+    _WORK = ROOT
+else:
+    _WORK = Path(os.getenv("FINAGENT_HOME", str(Path.home() / ".alphadesk")))
+    DATA_DIR = _WORK / "data"
+    CACHE_DIR = _PKG / "_data" / "cache"
+    if not CACHE_DIR.is_dir() and (ROOT / "data" / "cache").is_dir():
+        CACHE_DIR = ROOT / "data" / "cache"
 PRICES_DIR = CACHE_DIR / "prices"
 FILINGS_DIR = CACHE_DIR / "filings"
 FACTS_DIR = CACHE_DIR / "facts"
 NEWS_DIR = CACHE_DIR / "news"
 INDEX_DIR = DATA_DIR / "index"
-TRACE_DIR = ROOT / "traces"
-REPORT_DIR = ROOT / "reports"
+TRACE_DIR = _WORK / "traces"
+REPORT_DIR = _WORK / "reports"
 PROFILE_PATH = DATA_DIR / "user_profile.json"
 
 # SEC 要求请求头带上联系方式，见 https://www.sec.gov/os/accessing-edgar-data

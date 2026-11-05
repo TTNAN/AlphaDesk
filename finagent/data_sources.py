@@ -39,7 +39,7 @@ def _write_json(path: Path, obj) -> None:
 
 def _read_json(path: Path):
     if not path.exists():
-        raise DataUnavailable(f"缓存不存在: {path.relative_to(config.ROOT)}，请先运行 scripts/fetch_data.py")
+        raise DataUnavailable(f"缓存不存在: {path}，请先运行 scripts/fetch_data.py")
     return json.loads(path.read_text(encoding="utf-8"))
 
 

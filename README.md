@@ -148,6 +148,23 @@ flowchart LR
 - 代码中没有任何真实交易路径。
 - 违规请求（保证收益、内幕消息、操纵股价）由模型拒答，评测中 6/6 通过。
 
+## 最快接入（uvx，免克隆）
+
+装好 [uv](https://docs.astral.sh/uv/) 和 Git 后，把下面这段写进 MCP 客户端配置（Claude Desktop、Cursor、Cherry Studio 通用）。首次启动会自动下载代码、依赖和数据快照，不需要 API key：
+
+```json
+{
+  "mcpServers": {
+    "alphadesk": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
+    }
+  }
+}
+```
+
+模拟订单和检索索引保存在 `~/.alphadesk`（Windows 为 `C:\Users\你的用户名\.alphadesk`），可用环境变量 `FINAGENT_HOME` 改位置。
+
 ## 安装（Windows）
 
 需要 Python 3.10 及以上和 Git。在 PowerShell 中执行：

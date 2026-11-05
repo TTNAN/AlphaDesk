@@ -148,6 +148,23 @@ flowchart LR
 - There is no real trading path anywhere in the code.
 - The model refuses prohibited requests (guaranteed returns, insider information, price manipulation): 6/6 passed in the eval.
 
+## Quick start (uvx, no clone)
+
+With [uv](https://docs.astral.sh/uv/) and Git installed, add this to your MCP client config (works for Claude Desktop, Cursor, Cherry Studio). The first launch downloads the code, dependencies and data snapshot. No API key needed:
+
+```json
+{
+  "mcpServers": {
+    "alphadesk": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/TTNAN/AlphaDesk", "alphadesk-mcp"]
+    }
+  }
+}
+```
+
+Simulated orders and the search index are stored in `~/.alphadesk`. Set `FINAGENT_HOME` to change it.
+
 ## Install (Windows)
 
 Requires Python 3.10+ and Git. In PowerShell:
