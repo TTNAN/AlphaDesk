@@ -1,0 +1,16 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.TTNAN/alphadesk",
+  "title": "AlphaDesk",
+  "description": "US equity research tools: SEC 10-K/10-Q search with citations, prices, risk, simulated orders.",
+  "repository": { "url": "https://github.com/TTNAN/AlphaDesk", "source": "github" },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/TTNAN/AlphaDesk/releases/download/v0.1.0/alphadesk.mcpb",
+      "fileSha256": "69109c56d2ef3643ea571ea0fa322ee3aceb417acda27e2ab1a9a3f454feab0c",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}
