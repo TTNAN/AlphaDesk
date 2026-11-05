@@ -93,7 +93,16 @@ After round 1, the tool, prompt and model settings were fixed based on the badca
 | Average latency | 19.4 s | **11.8 s** | ≤ 15 s |
 | Average cost (estimated at list price) | $0.0101 | **$0.0059** | ≤ $0.01 |
 
-Round 2 also adjusted the scoring rules (Chinese numeric units, and citations that contain the answer figure count as supporting). Rescored under the new rules, round 1 is 90.6% success and 83.3% citation accuracy, so the fixes themselves added +6.3 points of success and +8.4 points of citation accuracy, cut latency by 39% and cost by 42%. The one remaining failure is a false content-moderation block by the model provider. Both rounds used the same task set, so round 2 may overfit it. See [eval report section 3.7](docs/eval-report.md).
+Round 2 also adjusted the scoring rules (Chinese numeric units, and citations that contain the answer figure count as supporting). Rescored under the new rules, round 1 is 90.6% success and 83.3% citation accuracy, so the fixes themselves added +6.3 points of success and +8.4 points of citation accuracy, cut latency by 39% and cost by 42%. The one remaining failure is a false content-moderation block by the model provider. Both rounds used the same task set, so round 2 may overfit it. To check, I wrote 24 new tasks that were never used during tuning (committed before the run; no code changed after):
+
+| Metric | Dev set (32) | Holdout (24) |
+|---|---|---|
+| Task success | 96.9% | **91.7% (22/24)** |
+| Tool selection / order confirmation / refusal | 100% / 100% / 100% | **100% / 100% / 100%** |
+| Citation accuracy | 91.7% | **88.9% (8/9)** |
+| Avg latency / cost | 11.8 s / $0.0059 | **9.9 s / $0.0057** |
+
+Holdout failures: one missed the quarterly 10-Q data and wrongly said the figure was not yet disclosed; one rounded $6.66 billion to "6.6 billion" in Chinese units and failed the strict check. See [eval report section 3.8](docs/eval-report.md).
 
 **Other tests**
 
@@ -241,7 +250,7 @@ Cost estimates: DeepSeek list prices are built in (see `finagent/agent/cost.py`)
 
 | Gap | Today | Plan |
 |---|---|---|
-| Eval set may be overfit | Both rounds used the same 32 tasks, which were consulted during fixes | Build a held-out task set for validation |
+| Quarter-specific questions can miss the 10-Q | Holdout H06: retrieval returned only 10-K chunks | Filter to 10-Q when a question names a quarter; say "not found" instead of "not disclosed" |
 | Provider false blocks | A16 was blocked by Zhipu content moderation in both rounds | Retry once with a rephrased prompt and track these separately |
 | Weak retrieval on table questions | 8 of 49 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
 | Coarse refusal scoring | Keyword-based | Add human spot checks or an LLM judge |
