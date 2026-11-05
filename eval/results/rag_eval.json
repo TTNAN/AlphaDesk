@@ -1,0 +1,2421 @@
+{
+ "simple": {
+  "summary": {
+   "tokenizer": "simple",
+   "n_questions": 49,
+   "n_chunks": 1820,
+   "unlabeled": [],
+   "filtered_by_ticker": {
+    "recall@1": 0.510204,
+    "recall@3": 0.77551,
+    "recall@5": 0.836735,
+    "recall@10": 0.897959,
+    "mrr@10": 0.656317,
+    "avg_latency_ms": 4.09
+   },
+   "global": {
+    "recall@1": 0.367347,
+    "recall@3": 0.693878,
+    "recall@5": 0.795918,
+    "recall@10": 0.857143,
+    "mrr@10": 0.547813,
+    "avg_latency_ms": 4.14
+   },
+   "misses_filtered@5": [
+    "R07",
+    "R23",
+    "R24",
+    "R32",
+    "R34",
+    "R38",
+    "R41",
+    "R43"
+   ],
+   "misses_global@5": [
+    "R07",
+    "R23",
+    "R24",
+    "R29",
+    "R32",
+    "R34",
+    "R38",
+    "R41",
+    "R43",
+    "R45"
+   ]
+  },
+  "per_question": [
+   {
+    "id": "R01",
+    "ticker": "NVDA",
+    "topic": "human_capital",
+    "question": "How many employees did NVIDIA have at the end of fiscal year 2026?",
+    "gold": [
+     "NVDA-10K-1-031"
+    ],
+    "filtered_ms": 4.665328000100999,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "NVDA-10K-1-009",
+     "NVDA-10K-15-054",
+     "NVDA-10Q-P1-1-032"
+    ],
+    "global_ms": 4.40235499991104,
+    "global_rank": 4,
+    "global_top3": [
+     "NVDA-10K-1-009",
+     "NVDA-10K-15-054",
+     "NVDA-10Q-P1-1-032"
+    ]
+   },
+   {
+    "id": "R02",
+    "ticker": "NVDA",
+    "topic": "auditor",
+    "question": "Which independent accounting firm audited NVIDIA's internal control over financial reporting?",
+    "gold": [
+     "NVDA-10K-9A-001"
+    ],
+    "filtered_ms": 5.182046999834711,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10K-15-001",
+     "NVDA-10K-9A-001",
+     "NVDA-10K-15-002"
+    ],
+    "global_ms": 5.0369159998808755,
+    "global_rank": 4,
+    "global_top3": [
+     "NVDA-10K-15-001",
+     "MSFT-10K-9A-002",
+     "TSLA-10K-9A-002"
+    ]
+   },
+   {
+    "id": "R03",
+    "ticker": "NVDA",
+    "topic": "properties",
+    "question": "Where is NVIDIA's corporate headquarters located?",
+    "gold": [
+     "NVDA-10K-2-000"
+    ],
+    "filtered_ms": 2.8363470000840607,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10K-1A-031",
+     "NVDA-10K-2-000",
+     "NVDA-10K-15-072"
+    ],
+    "global_ms": 5.662995999955456,
+    "global_rank": 5,
+    "global_top3": [
+     "AAPL-10K-2-000",
+     "MSFT-10K-2-000",
+     "NVDA-10K-1A-031"
+    ]
+   },
+   {
+    "id": "R04",
+    "ticker": "NVDA",
+    "topic": "capital_return",
+    "question": "How much stock repurchase authorization did NVIDIA have remaining as of January 25, 2026?",
+    "gold": [
+     "NVDA-10K-5-002",
+     "NVDA-10K-7-024"
+    ],
+    "filtered_ms": 5.0943930000357796,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10K-15-068",
+     "NVDA-10K-7-024",
+     "NVDA-10Q-P2-2-000"
+    ],
+    "global_ms": 4.859706000388542,
+    "global_rank": 2,
+    "global_top3": [
+     "NVDA-10K-15-068",
+     "NVDA-10K-7-024",
+     "NVDA-10Q-P2-2-000"
+    ]
+   },
+   {
+    "id": "R05",
+    "ticker": "NVDA",
+    "topic": "concentration",
+    "question": "What percentage of NVIDIA total revenue came from its largest direct customer in fiscal 2026?",
+    "gold": [
+     "NVDA-10K-1A-041",
+     "NVDA-10K-7-016"
+    ],
+    "filtered_ms": 5.9379099998295715,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-7-016",
+     "NVDA-10K-15-074"
+    ],
+    "global_ms": 5.958521999673394,
+    "global_rank": 2,
+    "global_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-7-016",
+     "NVDA-10K-15-074"
+    ]
+   },
+   {
+    "id": "R06",
+    "ticker": "NVDA",
+    "topic": "export_control",
+    "question": "What charge did NVIDIA record after the US government required a license for H20 exports to China?",
+    "gold": [
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058",
+     "NVDA-10K-7-003",
+     "NVDA-10Q-P2-1A-013"
+    ],
+    "filtered_ms": 5.854966000242712,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P2-1A-013",
+     "NVDA-10K-7-003",
+     "NVDA-10K-1-025"
+    ],
+    "global_ms": 5.347998999695847,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P2-1A-013",
+     "NVDA-10K-7-003",
+     "NVDA-10K-1-025"
+    ]
+   },
+   {
+    "id": "R07",
+    "ticker": "NVDA",
+    "topic": "results",
+    "question": "What was NVIDIA's total revenue for fiscal year 2026 and how fast did it grow?",
+    "gold": [
+     "NVDA-10K-7-007"
+    ],
+    "filtered_ms": 5.7223899998462,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-074",
+     "NVDA-10K-15-013"
+    ],
+    "global_ms": 4.760983999858581,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-074",
+     "NVDA-10K-15-013"
+    ]
+   },
+   {
+    "id": "R08",
+    "ticker": "NVDA",
+    "topic": "capital_return",
+    "question": "How did NVIDIA change its quarterly dividend per share in May 2026?",
+    "gold": [
+     "NVDA-10Q-P1-1-039",
+     "NVDA-10Q-P1-2-025",
+     "NVDA-10Q-P2-2-000"
+    ],
+    "filtered_ms": 3.8925059998291545,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P2-2-000",
+     "NVDA-10Q-P1-2-025",
+     "NVDA-10Q-P1-1-039"
+    ],
+    "global_ms": 3.8568380000469915,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P2-2-000",
+     "NVDA-10Q-P1-2-025",
+     "AAPL-10Q-P1-2-013"
+    ]
+   },
+   {
+    "id": "R09",
+    "ticker": "NVDA",
+    "topic": "cybersecurity",
+    "question": "Which executive oversees NVIDIA's cybersecurity risk management and who do they report to?",
+    "gold": [
+     "NVDA-10K-1C-002"
+    ],
+    "filtered_ms": 4.177821000212134,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10K-1C-002",
+     "NVDA-10Q-P2-6-003",
+     "NVDA-10K-10-001"
+    ],
+    "global_ms": 4.044192000037583,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10K-1C-002",
+     "NVDA-10K-1C-002",
+     "MSFT-10K-1C-005"
+    ]
+   },
+   {
+    "id": "R10",
+    "ticker": "NVDA",
+    "topic": "geography",
+    "question": "What share of NVIDIA revenue in the second quarter of fiscal 2027 came from customers headquartered outside the United States?",
+    "gold": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10Q-P1-2-018"
+    ],
+    "filtered_ms": 7.014923000042472,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10Q-P1-2-018",
+     "NVDA-10K-15-073"
+    ],
+    "global_ms": 10.738522999872657,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10Q-P1-2-018",
+     "NVDA-10K-15-073"
+    ]
+   },
+   {
+    "id": "R11",
+    "ticker": "MSFT",
+    "topic": "human_capital",
+    "question": "How many full-time employees did Microsoft have as of June 30, 2026?",
+    "gold": [
+     "MSFT-10K-1-023"
+    ],
+    "filtered_ms": 4.946044000007532,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-1-023",
+     "MSFT-10K-15-007",
+     "MSFT-10K-9A-003"
+    ],
+    "global_ms": 4.666044000259717,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-1-023",
+     "MSFT-10K-15-007",
+     "MSFT-10K-9A-003"
+    ]
+   },
+   {
+    "id": "R12",
+    "ticker": "MSFT",
+    "topic": "auditor",
+    "question": "Which accounting firm audits Microsoft's financial statements?",
+    "gold": [
+     "MSFT-10K-14-000",
+     "MSFT-10K-7-043",
+     "MSFT-10K-7-044",
+     "MSFT-10K-9A-002"
+    ],
+    "filtered_ms": 3.6480710000432737,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10K-8-073",
+     "MSFT-10K-7-044",
+     "MSFT-10K-7-043"
+    ],
+    "global_ms": 3.6855859998468077,
+    "global_rank": 3,
+    "global_top3": [
+     "MSFT-10K-8-073",
+     "AAPL-10K-8-043",
+     "MSFT-10K-7-044"
+    ]
+   },
+   {
+    "id": "R13",
+    "ticker": "MSFT",
+    "topic": "properties",
+    "question": "Where are Microsoft's corporate headquarters?",
+    "gold": [
+     "MSFT-10K-2-000"
+    ],
+    "filtered_ms": 2.3715520001132973,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-2-000",
+     "MSFT-10K-1-035",
+     "MSFT-10K-1-031"
+    ],
+    "global_ms": 2.2627650000686117,
+    "global_rank": 3,
+    "global_top3": [
+     "NVDA-10K-2-000",
+     "AAPL-10K-2-000",
+     "MSFT-10K-2-000"
+    ]
+   },
+   {
+    "id": "R14",
+    "ticker": "MSFT",
+    "topic": "segments",
+    "question": "What are Microsoft's reportable operating segments?",
+    "gold": [
+     "MSFT-10K-1-006",
+     "MSFT-10K-7-006",
+     "MSFT-10K-8-065"
+    ],
+    "filtered_ms": 2.952355000161333,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10Q-P1-1-042",
+     "MSFT-10K-1-006",
+     "MSFT-10Q-P1-2-015"
+    ],
+    "global_ms": 2.6431649998812645,
+    "global_rank": 2,
+    "global_top3": [
+     "MSFT-10Q-P1-1-042",
+     "MSFT-10K-1-006",
+     "AAPL-10K-8-039"
+    ]
+   },
+   {
+    "id": "R15",
+    "ticker": "MSFT",
+    "topic": "strategy",
+    "question": "Describe Microsoft's partnership with OpenAI.",
+    "gold": [
+     "MSFT-10K-1A-014",
+     "MSFT-10K-7-002",
+     "MSFT-10K-8-022",
+     "MSFT-10Q-P1-1-011",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10Q-P2-1A-013"
+    ],
+    "filtered_ms": 2.713316000154009,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-7-002",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10K-8-022"
+    ],
+    "global_ms": 3.0760969998482324,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-7-002",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10K-8-022"
+    ]
+   },
+   {
+    "id": "R16",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "How much did Microsoft Cloud revenue grow in fiscal year 2026?",
+    "gold": [
+     "MSFT-10K-7-001"
+    ],
+    "filtered_ms": 4.784165999808465,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-010"
+    ],
+    "global_ms": 4.612560000168742,
+    "global_rank": 2,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-010"
+    ]
+   },
+   {
+    "id": "R17",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "How fast did Azure revenue grow in the first quarter of fiscal year 2027?",
+    "gold": [
+     "MSFT-10Q-P1-2-003"
+    ],
+    "filtered_ms": 5.111661999762873,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10Q-P1-2-009",
+     "MSFT-10Q-P1-2-006"
+    ],
+    "global_ms": 5.576042000029702,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "NVDA-10Q-P1-2-016",
+     "NVDA-10Q-P1-2-018"
+    ]
+   },
+   {
+    "id": "R18",
+    "ticker": "MSFT",
+    "topic": "cybersecurity",
+    "question": "Who presents cybersecurity topics to Microsoft's Board of Directors?",
+    "gold": [
+     "MSFT-10K-1C-005"
+    ],
+    "filtered_ms": 3.7551780001194857,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-1C-005",
+     "MSFT-10K-1C-007",
+     "MSFT-10K-1C-006"
+    ],
+    "global_ms": 3.395460000319872,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-1C-005",
+     "MSFT-10K-1C-007",
+     "AMZN-10K-1C-001"
+    ]
+   },
+   {
+    "id": "R19",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "By how much did Microsoft's total revenue increase in fiscal year 2026 compared with fiscal 2025?",
+    "gold": [
+     "MSFT-10K-7-010"
+    ],
+    "filtered_ms": 6.309607999810396,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-010"
+    ],
+    "global_ms": 6.248418999803107,
+    "global_rank": 4,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "NVDA-10Q-P1-2-018",
+     "MSFT-10K-7-001"
+    ]
+   },
+   {
+    "id": "R20",
+    "ticker": "MSFT",
+    "topic": "backlog",
+    "question": "What was Microsoft's commercial remaining performance obligation at the end of Q1 fiscal 2027?",
+    "gold": [
+     "MSFT-10Q-P1-2-003"
+    ],
+    "filtered_ms": 4.957073999776185,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10K-7-008",
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10Q-P1-2-009"
+    ],
+    "global_ms": 4.653867000342871,
+    "global_rank": 2,
+    "global_top3": [
+     "MSFT-10K-7-008",
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10Q-P1-2-009"
+    ]
+   },
+   {
+    "id": "R21",
+    "ticker": "AAPL",
+    "topic": "human_capital",
+    "question": "How many full-time equivalent employees did Apple have as of September 26, 2026?",
+    "gold": [
+     "AAPL-10K-1-012"
+    ],
+    "filtered_ms": 5.238957000074151,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1-012",
+     "AAPL-10K-8-033",
+     "AAPL-10Q-P1-1-009"
+    ],
+    "global_ms": 5.304172999785806,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-1-012",
+     "AAPL-10K-8-033",
+     "AAPL-10Q-P1-1-009"
+    ]
+   },
+   {
+    "id": "R22",
+    "ticker": "AAPL",
+    "topic": "auditor",
+    "question": "Who is Apple's independent auditor and since when?",
+    "gold": [
+     "AAPL-10K-8-046"
+    ],
+    "filtered_ms": 2.6803079999808688,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-8-046",
+     "AAPL-10K-8-000",
+     "AAPL-10K-8-042"
+    ],
+    "global_ms": 2.474984999935259,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-8-046",
+     "MSFT-10K-7-044",
+     "MSFT-10K-8-079"
+    ]
+   },
+   {
+    "id": "R23",
+    "ticker": "AAPL",
+    "topic": "properties",
+    "question": "Where is Apple headquartered?",
+    "gold": [
+     "AAPL-10K-2-000"
+    ],
+    "filtered_ms": 1.4073180000195862,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "AAPL-10K-1-001",
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-046"
+    ],
+    "global_ms": 1.3618630000564735,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058",
+     "NVDA-10Q-P2-1A-013"
+    ]
+   },
+   {
+    "id": "R24",
+    "ticker": "AAPL",
+    "topic": "capital_return",
+    "question": "How many shares did Apple repurchase during fiscal 2026 and for how much?",
+    "gold": [
+     "AAPL-10K-8-032"
+    ],
+    "filtered_ms": 4.575508000016271,
+    "filtered_rank": 7,
+    "filtered_top3": [
+     "AAPL-10K-5-002",
+     "AAPL-10Q-P1-1-017",
+     "AAPL-10Q-P2-2-001"
+    ],
+    "global_ms": 4.401748000418593,
+    "global_rank": null,
+    "global_top3": [
+     "MSFT-10K-8-060",
+     "MSFT-10Q-P2-2-000",
+     "NVDA-10Q-P2-2-000"
+    ]
+   },
+   {
+    "id": "R25",
+    "ticker": "AAPL",
+    "topic": "segments",
+    "question": "What are Apple's reportable geographic segments?",
+    "gold": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-038"
+    ],
+    "filtered_ms": 2.702399000099831,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-039",
+     "AAPL-10K-8-038"
+    ],
+    "global_ms": 2.639670999997179,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-039",
+     "MSFT-10K-7-006"
+    ]
+   },
+   {
+    "id": "R26",
+    "ticker": "AAPL",
+    "topic": "geography",
+    "question": "What were Apple's Greater China net sales in fiscal 2026?",
+    "gold": [
+     "AAPL-10K-7-004"
+    ],
+    "filtered_ms": 4.285207000066293,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004",
+     "AAPL-10Q-P1-1-020"
+    ],
+    "global_ms": 4.060014999595296,
+    "global_rank": 2,
+    "global_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004",
+     "AAPL-10Q-P1-1-020"
+    ]
+   },
+   {
+    "id": "R27",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "Why did iPhone net sales increase in fiscal 2026?",
+    "gold": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-008"
+    ],
+    "filtered_ms": 4.073984000115161,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004"
+    ],
+    "global_ms": 4.117154000141454,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004"
+    ]
+   },
+   {
+    "id": "R28",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "What drove growth in Apple's Services net sales?",
+    "gold": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-009"
+    ],
+    "filtered_ms": 3.8009360000614834,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-8-011"
+    ],
+    "global_ms": 3.9916800001265074,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10K-7-020",
+     "AAPL-10K-7-005",
+     "AMZN-10Q-P1-2-014"
+    ]
+   },
+   {
+    "id": "R29",
+    "ticker": "AAPL",
+    "topic": "tariffs",
+    "question": "What happened with the Supreme Court and IEEPA tariffs according to Apple's 10-K?",
+    "gold": [
+     "AAPL-10K-7-003"
+    ],
+    "filtered_ms": 7.303835999664443,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-004",
+     "AAPL-10Q-P2-1-003",
+     "AAPL-10K-1A-048"
+    ],
+    "global_ms": 4.555630000140809,
+    "global_rank": 6,
+    "global_top3": [
+     "TSLA-10Q-P1-1-052",
+     "AAPL-10Q-P1-2-004",
+     "AAPL-10Q-P2-1-003"
+    ]
+   },
+   {
+    "id": "R30",
+    "ticker": "AAPL",
+    "topic": "cybersecurity",
+    "question": "Who leads Apple's management of cybersecurity risk?",
+    "gold": [
+     "AAPL-10K-1C-000"
+    ],
+    "filtered_ms": 2.9509619998862036,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1C-000",
+     "AAPL-10K-1C-001",
+     "AAPL-10Q-P2-1A-013"
+    ],
+    "global_ms": 2.9717409997829236,
+    "global_rank": 2,
+    "global_top3": [
+     "MSFT-10K-1C-006",
+     "AAPL-10K-1C-000",
+     "NVDA-10K-1C-000"
+    ]
+   },
+   {
+    "id": "R31",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "What were Apple's total net sales in the third quarter of fiscal 2026?",
+    "gold": [
+     "AAPL-10Q-P1-1-007",
+     "AAPL-10Q-P1-2-006",
+     "AAPL-10Q-P1-2-008"
+    ],
+    "filtered_ms": 4.767108999658376,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10Q-P1-2-009",
+     "AAPL-10Q-P1-2-002"
+    ],
+    "global_ms": 4.977497999789193,
+    "global_rank": 4,
+    "global_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10Q-P1-2-009",
+     "AAPL-10Q-P1-2-002"
+    ]
+   },
+   {
+    "id": "R32",
+    "ticker": "TSLA",
+    "topic": "properties",
+    "question": "Where is Tesla headquartered?",
+    "gold": [
+     "TSLA-10K-2-000"
+    ],
+    "filtered_ms": 1.448259000426333,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "TSLA-10K-8-122",
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10K-8-115"
+    ],
+    "global_ms": 1.2409070000103384,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058",
+     "NVDA-10Q-P2-1A-013"
+    ]
+   },
+   {
+    "id": "R33",
+    "ticker": "TSLA",
+    "topic": "auditor",
+    "question": "How long has PricewaterhouseCoopers served as Tesla's auditor?",
+    "gold": [
+     "TSLA-10K-8-010"
+    ],
+    "filtered_ms": 2.9655809998985205,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-8-010",
+     "TSLA-10K-8-006",
+     "TSLA-10K-15-005"
+    ],
+    "global_ms": 2.8266529998290935,
+    "global_rank": 1,
+    "global_top3": [
+     "TSLA-10K-8-010",
+     "MSFT-10K-8-079",
+     "NVDA-10K-15-007"
+    ]
+   },
+   {
+    "id": "R34",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "What were Tesla's total revenues in 2025?",
+    "gold": [
+     "TSLA-10K-7-003"
+    ],
+    "filtered_ms": 2.6899819999925967,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10Q-P1-1-001",
+     "TSLA-10K-8-012"
+    ],
+    "global_ms": 2.7410930001678935,
+    "global_rank": null,
+    "global_top3": [
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10Q-P1-1-001",
+     "TSLA-10K-8-012"
+    ]
+   },
+   {
+    "id": "R35",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "How did Tesla's automotive regulatory credits revenue change in 2025?",
+    "gold": [
+     "TSLA-10K-7-025"
+    ],
+    "filtered_ms": 4.265752000264911,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "TSLA-10K-7-024",
+     "TSLA-10K-8-027",
+     "TSLA-10K-7-025"
+    ],
+    "global_ms": 5.295822999869415,
+    "global_rank": 3,
+    "global_top3": [
+     "TSLA-10K-7-024",
+     "TSLA-10K-8-027",
+     "TSLA-10K-7-025"
+    ]
+   },
+   {
+    "id": "R36",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "How much did Tesla's energy generation and storage revenue grow in 2025 and why?",
+    "gold": [
+     "TSLA-10K-7-026"
+    ],
+    "filtered_ms": 5.15106900002138,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "TSLA-10K-7-030",
+     "TSLA-10K-1-006",
+     "TSLA-10K-7-026"
+    ],
+    "global_ms": 4.954447000272921,
+    "global_rank": 3,
+    "global_top3": [
+     "TSLA-10K-7-030",
+     "TSLA-10K-1-006",
+     "TSLA-10K-7-026"
+    ]
+   },
+   {
+    "id": "R37",
+    "ticker": "TSLA",
+    "topic": "products",
+    "question": "Which consumer vehicle models does Tesla currently manufacture?",
+    "gold": [
+     "TSLA-10K-1-001"
+    ],
+    "filtered_ms": 3.6213230000612384,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-1-001",
+     "TSLA-10K-1-012",
+     "TSLA-10K-1-009"
+    ],
+    "global_ms": 3.6462050002228352,
+    "global_rank": 1,
+    "global_top3": [
+     "TSLA-10K-1-001",
+     "TSLA-10K-1-012",
+     "TSLA-10K-1-009"
+    ]
+   },
+   {
+    "id": "R38",
+    "ticker": "TSLA",
+    "topic": "strategy",
+    "question": "What is Tesla's strategy around AI robots such as Optimus?",
+    "gold": [
+     "TSLA-10K-7-001"
+    ],
+    "filtered_ms": 3.4306879997529904,
+    "filtered_rank": 6,
+    "filtered_top3": [
+     "TSLA-10K-8-018",
+     "TSLA-10K-1-004",
+     "TSLA-10K-7-004"
+    ],
+    "global_ms": 3.1990979996407987,
+    "global_rank": 7,
+    "global_top3": [
+     "TSLA-10K-8-018",
+     "TSLA-10K-1-004",
+     "TSLA-10K-7-004"
+    ]
+   },
+   {
+    "id": "R39",
+    "ticker": "TSLA",
+    "topic": "cybersecurity",
+    "question": "Which teams oversee Tesla's cybersecurity incident response?",
+    "gold": [
+     "TSLA-10K-1C-001",
+     "TSLA-10K-1C-004"
+    ],
+    "filtered_ms": 3.754643999855034,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-1C-001",
+     "TSLA-10K-1C-004",
+     "TSLA-10K-1-032"
+    ],
+    "global_ms": 3.7658249998457904,
+    "global_rank": 3,
+    "global_top3": [
+     "NVDA-10K-1C-002",
+     "AMZN-10K-1C-002",
+     "TSLA-10K-1C-001"
+    ]
+   },
+   {
+    "id": "R40",
+    "ticker": "TSLA",
+    "topic": "human_capital",
+    "question": "How many Tesla employees advanced their careers in 2025?",
+    "gold": [
+     "TSLA-10K-1-030"
+    ],
+    "filtered_ms": 3.5545929999898362,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-1-030",
+     "TSLA-10K-1-004",
+     "TSLA-10K-1-031"
+    ],
+    "global_ms": 5.137736000051518,
+    "global_rank": 1,
+    "global_top3": [
+     "TSLA-10K-1-030",
+     "AMZN-10K-1-006",
+     "MSFT-10Q-P1-2-006"
+    ]
+   },
+   {
+    "id": "R41",
+    "ticker": "AMZN",
+    "topic": "human_capital",
+    "question": "How many employees did Amazon have as of December 31, 2025?",
+    "gold": [
+     "AMZN-10K-1-005"
+    ],
+    "filtered_ms": 3.7020220001977577,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "AMZN-10K-15-003",
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001"
+    ],
+    "global_ms": 3.943000999697688,
+    "global_rank": null,
+    "global_top3": [
+     "AMZN-10K-15-003",
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001"
+    ]
+   },
+   {
+    "id": "R42",
+    "ticker": "AMZN",
+    "topic": "segments",
+    "question": "What are Amazon's operating segments?",
+    "gold": [
+     "AMZN-10K-1-000",
+     "AMZN-10K-7-018",
+     "AMZN-10K-8-011",
+     "AMZN-10K-8-089",
+     "AMZN-10Q-P1-1-055",
+     "AMZN-10Q-P1-2-012"
+    ],
+    "filtered_ms": 2.1528650004256633,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-1-000",
+     "AMZN-10K-8-090",
+     "AMZN-10Q-P1-1-056"
+    ],
+    "global_ms": 2.153947999886441,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-1-000",
+     "NVDA-10K-15-069",
+     "NVDA-10Q-P1-1-039"
+    ]
+   },
+   {
+    "id": "R43",
+    "ticker": "AMZN",
+    "topic": "results",
+    "question": "How much did AWS sales grow in 2025?",
+    "gold": [
+     "AMZN-10K-7-021"
+    ],
+    "filtered_ms": 3.443193999828509,
+    "filtered_rank": 10,
+    "filtered_top3": [
+     "AMZN-10K-7-020",
+     "AMZN-10K-8-011",
+     "AMZN-10K-5-000"
+    ],
+    "global_ms": 3.388772000107565,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-1A-037",
+     "AMZN-10K-7-020",
+     "TSLA-10K-1A-007"
+    ]
+   },
+   {
+    "id": "R44",
+    "ticker": "AMZN",
+    "topic": "results",
+    "question": "What was AWS sales growth in Q3 2026?",
+    "gold": [
+     "AMZN-10Q-P1-2-015"
+    ],
+    "filtered_ms": 3.302345000065543,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "AMZN-10Q-P1-2-014",
+     "AMZN-10Q-P1-2-015",
+     "AMZN-10Q-P1-2-025"
+    ],
+    "global_ms": 3.213709000192466,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10Q-P1-2-014",
+     "AMZN-10Q-P1-2-015",
+     "AMZN-10Q-P1-2-025"
+    ]
+   },
+   {
+    "id": "R45",
+    "ticker": "AMZN",
+    "topic": "properties",
+    "question": "Where are Amazon's corporate headquarters?",
+    "gold": [
+     "AMZN-10K-2-000"
+    ],
+    "filtered_ms": 2.333974999601196,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-2-000",
+     "AMZN-10K-10-000",
+     "AMZN-10K-1-007"
+    ],
+    "global_ms": 2.179044999593316,
+    "global_rank": 6,
+    "global_top3": [
+     "NVDA-10K-2-000",
+     "AAPL-10K-2-000",
+     "MSFT-10K-2-000"
+    ]
+   },
+   {
+    "id": "R46",
+    "ticker": "AMZN",
+    "topic": "capital_return",
+    "question": "What is the size of Amazon's stock repurchase program authorized in March 2022?",
+    "gold": [
+     "AMZN-10K-8-077",
+     "AMZN-10Q-P1-1-047"
+    ],
+    "filtered_ms": 4.54072599995925,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10Q-P1-1-047",
+     "AMZN-10K-8-077",
+     "AMZN-10K-15-003"
+    ],
+    "global_ms": 4.402289999688946,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10Q-P1-1-047",
+     "AMZN-10K-8-077",
+     "NVDA-10K-7-024"
+    ]
+   },
+   {
+    "id": "R47",
+    "ticker": "AMZN",
+    "topic": "guidance",
+    "question": "How do Amazon Leo costs affect Amazon's first quarter 2026 operating income guidance?",
+    "gold": [
+     "AMZN-10K-7-037"
+    ],
+    "filtered_ms": 6.683863000034762,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-7-037",
+     "AMZN-10Q-P1-2-030",
+     "AMZN-10K-7-036"
+    ],
+    "global_ms": 6.590744999812159,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-7-037",
+     "AMZN-10Q-P1-2-030",
+     "AMZN-10K-7-036"
+    ]
+   },
+   {
+    "id": "R48",
+    "ticker": "AMZN",
+    "topic": "auditor",
+    "question": "Which firm is Amazon's independent registered public accounting firm?",
+    "gold": [
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001",
+     "AMZN-10K-8-006",
+     "AMZN-10K-9A-005"
+    ],
+    "filtered_ms": 4.514748000019608,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-8-001",
+     "AMZN-10K-15-000",
+     "AMZN-10K-9A-002"
+    ],
+    "global_ms": 4.545108999991498,
+    "global_rank": 2,
+    "global_top3": [
+     "TSLA-10K-8-000",
+     "AMZN-10K-8-001",
+     "AMZN-10K-15-000"
+    ]
+   },
+   {
+    "id": "R49",
+    "ticker": "AMZN",
+    "topic": "cybersecurity",
+    "question": "To whom does the head of Amazon's security team report?",
+    "gold": [
+     "AMZN-10K-1C-002"
+    ],
+    "filtered_ms": 3.0715969996890635,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-1C-002",
+     "AMZN-10K-1C-001",
+     "AMZN-10K-1-006"
+    ],
+    "global_ms": 3.0715389998476894,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-1C-002",
+     "AAPL-10K-1C-000",
+     "AAPL-10K-1C-001"
+    ]
+   }
+  ]
+ },
+ "porter": {
+  "summary": {
+   "tokenizer": "porter",
+   "n_questions": 49,
+   "n_chunks": 1820,
+   "unlabeled": [],
+   "filtered_by_ticker": {
+    "recall@1": 0.489796,
+    "recall@3": 0.734694,
+    "recall@5": 0.836735,
+    "recall@10": 0.918367,
+    "mrr@10": 0.635058,
+    "avg_latency_ms": 3.01
+   },
+   "global": {
+    "recall@1": 0.387755,
+    "recall@3": 0.632653,
+    "recall@5": 0.734694,
+    "recall@10": 0.857143,
+    "mrr@10": 0.541213,
+    "avg_latency_ms": 3.11
+   },
+   "misses_filtered@5": [
+    "R01",
+    "R07",
+    "R13",
+    "R32",
+    "R34",
+    "R38",
+    "R41",
+    "R43"
+   ],
+   "misses_global@5": [
+    "R01",
+    "R02",
+    "R07",
+    "R13",
+    "R23",
+    "R24",
+    "R29",
+    "R32",
+    "R34",
+    "R38",
+    "R41",
+    "R43",
+    "R45"
+   ]
+  },
+  "per_question": [
+   {
+    "id": "R01",
+    "ticker": "NVDA",
+    "topic": "human_capital",
+    "question": "How many employees did NVIDIA have at the end of fiscal year 2026?",
+    "gold": [
+     "NVDA-10K-1-031"
+    ],
+    "filtered_ms": 3.2761649999883957,
+    "filtered_rank": 8,
+    "filtered_top3": [
+     "NVDA-10Q-P2-1A-000",
+     "NVDA-10K-1-009",
+     "NVDA-10K-15-054"
+    ],
+    "global_ms": 3.0000699998709024,
+    "global_rank": 8,
+    "global_top3": [
+     "NVDA-10Q-P2-1A-000",
+     "NVDA-10K-1-009",
+     "NVDA-10K-15-054"
+    ]
+   },
+   {
+    "id": "R02",
+    "ticker": "NVDA",
+    "topic": "auditor",
+    "question": "Which independent accounting firm audited NVIDIA's internal control over financial reporting?",
+    "gold": [
+     "NVDA-10K-9A-001"
+    ],
+    "filtered_ms": 3.616729999976087,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "NVDA-10K-15-001",
+     "NVDA-10K-15-002",
+     "NVDA-10K-9A-001"
+    ],
+    "global_ms": 3.7884459998167586,
+    "global_rank": 10,
+    "global_top3": [
+     "NVDA-10K-15-001",
+     "MSFT-10K-9A-004",
+     "AAPL-10K-8-047"
+    ]
+   },
+   {
+    "id": "R03",
+    "ticker": "NVDA",
+    "topic": "properties",
+    "question": "Where is NVIDIA's corporate headquarters located?",
+    "gold": [
+     "NVDA-10K-2-000"
+    ],
+    "filtered_ms": 1.9839060000776954,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10K-15-072",
+     "NVDA-10K-2-000",
+     "NVDA-10Q-P1-1-043"
+    ],
+    "global_ms": 1.9016040000678913,
+    "global_rank": 4,
+    "global_top3": [
+     "MSFT-10K-2-000",
+     "AAPL-10K-2-000",
+     "NVDA-10K-15-072"
+    ]
+   },
+   {
+    "id": "R04",
+    "ticker": "NVDA",
+    "topic": "capital_return",
+    "question": "How much stock repurchase authorization did NVIDIA have remaining as of January 25, 2026?",
+    "gold": [
+     "NVDA-10K-5-002",
+     "NVDA-10K-7-024"
+    ],
+    "filtered_ms": 3.658797999833041,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10K-15-068",
+     "NVDA-10K-7-024",
+     "NVDA-10K-5-002"
+    ],
+    "global_ms": 3.8528909999513417,
+    "global_rank": 2,
+    "global_top3": [
+     "NVDA-10K-15-068",
+     "NVDA-10K-7-024",
+     "NVDA-10K-5-002"
+    ]
+   },
+   {
+    "id": "R05",
+    "ticker": "NVDA",
+    "topic": "concentration",
+    "question": "What percentage of NVIDIA total revenue came from its largest direct customer in fiscal 2026?",
+    "gold": [
+     "NVDA-10K-1A-041",
+     "NVDA-10K-7-016"
+    ],
+    "filtered_ms": 4.298655000184226,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-7-016",
+     "NVDA-10K-15-074"
+    ],
+    "global_ms": 4.374656999971194,
+    "global_rank": 2,
+    "global_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-7-016",
+     "NVDA-10K-15-074"
+    ]
+   },
+   {
+    "id": "R06",
+    "ticker": "NVDA",
+    "topic": "export_control",
+    "question": "What charge did NVIDIA record after the US government required a license for H20 exports to China?",
+    "gold": [
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058",
+     "NVDA-10K-7-003",
+     "NVDA-10Q-P2-1A-013"
+    ],
+    "filtered_ms": 4.133213999921281,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P2-1A-013",
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058"
+    ],
+    "global_ms": 4.071788000146626,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P2-1A-013",
+     "NVDA-10K-1-025",
+     "NVDA-10K-1A-058"
+    ]
+   },
+   {
+    "id": "R07",
+    "ticker": "NVDA",
+    "topic": "results",
+    "question": "What was NVIDIA's total revenue for fiscal year 2026 and how fast did it grow?",
+    "gold": [
+     "NVDA-10K-7-007"
+    ],
+    "filtered_ms": 3.306157999759307,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-013",
+     "NVDA-10K-15-074"
+    ],
+    "global_ms": 3.4601649999785877,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-013",
+     "NVDA-10K-15-074"
+    ]
+   },
+   {
+    "id": "R08",
+    "ticker": "NVDA",
+    "topic": "capital_return",
+    "question": "How did NVIDIA change its quarterly dividend per share in May 2026?",
+    "gold": [
+     "NVDA-10Q-P1-1-039",
+     "NVDA-10Q-P1-2-025",
+     "NVDA-10Q-P2-2-000"
+    ],
+    "filtered_ms": 2.629883000281552,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P2-2-000",
+     "NVDA-10Q-P1-2-025",
+     "NVDA-10Q-P1-1-039"
+    ],
+    "global_ms": 5.210793000060221,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P2-2-000",
+     "NVDA-10Q-P1-2-025",
+     "AAPL-10Q-P1-2-013"
+    ]
+   },
+   {
+    "id": "R09",
+    "ticker": "NVDA",
+    "topic": "cybersecurity",
+    "question": "Which executive oversees NVIDIA's cybersecurity risk management and who do they report to?",
+    "gold": [
+     "NVDA-10K-1C-002"
+    ],
+    "filtered_ms": 3.3764750000955246,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10K-1C-002",
+     "NVDA-10K-1-033",
+     "NVDA-10K-1C-000"
+    ],
+    "global_ms": 3.2120580003720534,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10K-1C-002",
+     "NVDA-10K-1C-002",
+     "MSFT-10K-1C-007"
+    ]
+   },
+   {
+    "id": "R10",
+    "ticker": "NVDA",
+    "topic": "geography",
+    "question": "What share of NVIDIA revenue in the second quarter of fiscal 2027 came from customers headquartered outside the United States?",
+    "gold": [
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10Q-P1-2-018"
+    ],
+    "filtered_ms": 5.108159999963391,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "NVDA-10Q-P1-2-018",
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-073"
+    ],
+    "global_ms": 4.926734000036959,
+    "global_rank": 1,
+    "global_top3": [
+     "NVDA-10Q-P1-2-018",
+     "NVDA-10Q-P1-1-044",
+     "NVDA-10K-15-073"
+    ]
+   },
+   {
+    "id": "R11",
+    "ticker": "MSFT",
+    "topic": "human_capital",
+    "question": "How many full-time employees did Microsoft have as of June 30, 2026?",
+    "gold": [
+     "MSFT-10K-1-023"
+    ],
+    "filtered_ms": 3.4259630001542973,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-1-023",
+     "MSFT-10K-15-007",
+     "MSFT-10K-9A-003"
+    ],
+    "global_ms": 3.5243269999227778,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-1-023",
+     "MSFT-10K-15-007",
+     "MSFT-10K-9A-003"
+    ]
+   },
+   {
+    "id": "R12",
+    "ticker": "MSFT",
+    "topic": "auditor",
+    "question": "Which accounting firm audits Microsoft's financial statements?",
+    "gold": [
+     "MSFT-10K-14-000",
+     "MSFT-10K-7-043",
+     "MSFT-10K-7-044",
+     "MSFT-10K-9A-002"
+    ],
+    "filtered_ms": 2.583049999884679,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10K-8-073",
+     "MSFT-10K-7-044",
+     "MSFT-10K-7-043"
+    ],
+    "global_ms": 2.658087999861891,
+    "global_rank": 3,
+    "global_top3": [
+     "MSFT-10K-8-073",
+     "AAPL-10K-8-043",
+     "MSFT-10K-7-044"
+    ]
+   },
+   {
+    "id": "R13",
+    "ticker": "MSFT",
+    "topic": "properties",
+    "question": "Where are Microsoft's corporate headquarters?",
+    "gold": [
+     "MSFT-10K-2-000"
+    ],
+    "filtered_ms": 1.7676010002105613,
+    "filtered_rank": 7,
+    "filtered_top3": [
+     "MSFT-10K-15-007",
+     "MSFT-10K-15-002",
+     "MSFT-10K-15-001"
+    ],
+    "global_ms": 1.7288120002376672,
+    "global_rank": 9,
+    "global_top3": [
+     "MSFT-10K-15-007",
+     "MSFT-10K-15-002",
+     "MSFT-10K-15-001"
+    ]
+   },
+   {
+    "id": "R14",
+    "ticker": "MSFT",
+    "topic": "segments",
+    "question": "What are Microsoft's reportable operating segments?",
+    "gold": [
+     "MSFT-10K-1-006",
+     "MSFT-10K-7-006",
+     "MSFT-10K-8-065"
+    ],
+    "filtered_ms": 2.2983240000939986,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "MSFT-10Q-P1-1-046",
+     "MSFT-10Q-P1-1-042",
+     "MSFT-10K-8-071"
+    ],
+    "global_ms": 2.5950290000764653,
+    "global_rank": 4,
+    "global_top3": [
+     "MSFT-10Q-P1-1-046",
+     "MSFT-10Q-P1-1-042",
+     "MSFT-10K-8-071"
+    ]
+   },
+   {
+    "id": "R15",
+    "ticker": "MSFT",
+    "topic": "strategy",
+    "question": "Describe Microsoft's partnership with OpenAI.",
+    "gold": [
+     "MSFT-10K-1A-014",
+     "MSFT-10K-7-002",
+     "MSFT-10K-8-022",
+     "MSFT-10Q-P1-1-011",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10Q-P2-1A-013"
+    ],
+    "filtered_ms": 2.012368999658065,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-7-002",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10K-8-022"
+    ],
+    "global_ms": 1.976116000150796,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-7-002",
+     "MSFT-10Q-P1-2-004",
+     "MSFT-10K-8-022"
+    ]
+   },
+   {
+    "id": "R16",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "How much did Microsoft Cloud revenue grow in fiscal year 2026?",
+    "gold": [
+     "MSFT-10K-7-001"
+    ],
+    "filtered_ms": 3.621521000241046,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-011"
+    ],
+    "global_ms": 3.706063999743492,
+    "global_rank": 2,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-011"
+    ]
+   },
+   {
+    "id": "R17",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "How fast did Azure revenue grow in the first quarter of fiscal year 2027?",
+    "gold": [
+     "MSFT-10Q-P1-2-003"
+    ],
+    "filtered_ms": 4.313965999699576,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10Q-P1-2-009",
+     "MSFT-10Q-P1-2-006"
+    ],
+    "global_ms": 3.895624000051612,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "NVDA-10Q-P1-2-016",
+     "NVDA-10Q-P1-2-018"
+    ]
+   },
+   {
+    "id": "R18",
+    "ticker": "MSFT",
+    "topic": "cybersecurity",
+    "question": "Who presents cybersecurity topics to Microsoft's Board of Directors?",
+    "gold": [
+     "MSFT-10K-1C-005"
+    ],
+    "filtered_ms": 2.6783270000123593,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10K-1C-005",
+     "MSFT-10K-1C-007",
+     "MSFT-10K-1C-006"
+    ],
+    "global_ms": 2.652481000041007,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10K-1C-005",
+     "MSFT-10K-1C-007",
+     "AMZN-10K-1C-001"
+    ]
+   },
+   {
+    "id": "R19",
+    "ticker": "MSFT",
+    "topic": "results",
+    "question": "By how much did Microsoft's total revenue increase in fiscal year 2026 compared with fiscal 2025?",
+    "gold": [
+     "MSFT-10K-7-010"
+    ],
+    "filtered_ms": 4.491998000048625,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "MSFT-10K-7-010"
+    ],
+    "global_ms": 5.335879000085697,
+    "global_rank": 4,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-001",
+     "NVDA-10Q-P1-2-018"
+    ]
+   },
+   {
+    "id": "R20",
+    "ticker": "MSFT",
+    "topic": "backlog",
+    "question": "What was Microsoft's commercial remaining performance obligation at the end of Q1 fiscal 2027?",
+    "gold": [
+     "MSFT-10Q-P1-2-003"
+    ],
+    "filtered_ms": 3.683006999835925,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-008",
+     "MSFT-10Q-P1-2-009"
+    ],
+    "global_ms": 3.7652669998351485,
+    "global_rank": 1,
+    "global_top3": [
+     "MSFT-10Q-P1-2-003",
+     "MSFT-10K-7-008",
+     "MSFT-10Q-P1-2-009"
+    ]
+   },
+   {
+    "id": "R21",
+    "ticker": "AAPL",
+    "topic": "human_capital",
+    "question": "How many full-time equivalent employees did Apple have as of September 26, 2026?",
+    "gold": [
+     "AAPL-10K-1-012"
+    ],
+    "filtered_ms": 3.708311000082176,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1-012",
+     "AAPL-10K-8-033",
+     "AAPL-10K-8-046"
+    ],
+    "global_ms": 3.7091219996909786,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-1-012",
+     "AAPL-10K-8-033",
+     "AAPL-10K-8-046"
+    ]
+   },
+   {
+    "id": "R22",
+    "ticker": "AAPL",
+    "topic": "auditor",
+    "question": "Who is Apple's independent auditor and since when?",
+    "gold": [
+     "AAPL-10K-8-046"
+    ],
+    "filtered_ms": 1.8478959996173216,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-8-046",
+     "AAPL-10K-8-000",
+     "AAPL-10K-8-042"
+    ],
+    "global_ms": 1.7969049999919662,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-8-046",
+     "MSFT-10K-7-044",
+     "MSFT-10K-8-079"
+    ]
+   },
+   {
+    "id": "R23",
+    "ticker": "AAPL",
+    "topic": "properties",
+    "question": "Where is Apple headquartered?",
+    "gold": [
+     "AAPL-10K-2-000"
+    ],
+    "filtered_ms": 1.1383020000721444,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-2-000",
+     "AAPL-10K-1-001",
+     "AAPL-10K-1-002"
+    ],
+    "global_ms": 1.1368400000719703,
+    "global_rank": 10,
+    "global_top3": [
+     "NVDA-10K-15-072",
+     "NVDA-10Q-P1-1-043",
+     "NVDA-10K-1-025"
+    ]
+   },
+   {
+    "id": "R24",
+    "ticker": "AAPL",
+    "topic": "capital_return",
+    "question": "How many shares did Apple repurchase during fiscal 2026 and for how much?",
+    "gold": [
+     "AAPL-10K-8-032"
+    ],
+    "filtered_ms": 3.3252200000788434,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "AAPL-10Q-P1-1-017",
+     "AAPL-10K-5-002",
+     "AAPL-10Q-P2-2-001"
+    ],
+    "global_ms": 3.5248230001343472,
+    "global_rank": null,
+    "global_top3": [
+     "MSFT-10K-8-060",
+     "NVDA-10Q-P2-2-000",
+     "MSFT-10Q-P2-2-000"
+    ]
+   },
+   {
+    "id": "R25",
+    "ticker": "AAPL",
+    "topic": "segments",
+    "question": "What are Apple's reportable geographic segments?",
+    "gold": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-038"
+    ],
+    "filtered_ms": 1.9278120003036747,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-039",
+     "AAPL-10K-8-038"
+    ],
+    "global_ms": 1.9025809997401666,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-1-002",
+     "AAPL-10K-8-039",
+     "MSFT-10K-1-006"
+    ]
+   },
+   {
+    "id": "R26",
+    "ticker": "AAPL",
+    "topic": "geography",
+    "question": "What were Apple's Greater China net sales in fiscal 2026?",
+    "gold": [
+     "AAPL-10K-7-004"
+    ],
+    "filtered_ms": 3.122337000149855,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004",
+     "AAPL-10Q-P1-1-020"
+    ],
+    "global_ms": 5.949956999756978,
+    "global_rank": 2,
+    "global_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004",
+     "AAPL-10Q-P1-1-020"
+    ]
+   },
+   {
+    "id": "R27",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "Why did iPhone net sales increase in fiscal 2026?",
+    "gold": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-008"
+    ],
+    "filtered_ms": 3.377595000074507,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004"
+    ],
+    "global_ms": 3.373083000042243,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-7-004"
+    ]
+   },
+   {
+    "id": "R28",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "What drove growth in Apple's Services net sales?",
+    "gold": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-009"
+    ],
+    "filtered_ms": 2.7652170001601917,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-7-005",
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10K-8-011"
+    ],
+    "global_ms": 2.7441860001999885,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10K-7-020",
+     "AAPL-10K-7-005",
+     "AMZN-10Q-P1-2-014"
+    ]
+   },
+   {
+    "id": "R29",
+    "ticker": "AAPL",
+    "topic": "tariffs",
+    "question": "What happened with the Supreme Court and IEEPA tariffs according to Apple's 10-K?",
+    "gold": [
+     "AAPL-10K-7-003"
+    ],
+    "filtered_ms": 3.203001000201766,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-004",
+     "AAPL-10Q-P2-1-003",
+     "AAPL-10K-1A-048"
+    ],
+    "global_ms": 3.515525000238995,
+    "global_rank": 6,
+    "global_top3": [
+     "TSLA-10Q-P1-1-052",
+     "AAPL-10Q-P1-2-004",
+     "AAPL-10Q-P2-1-003"
+    ]
+   },
+   {
+    "id": "R30",
+    "ticker": "AAPL",
+    "topic": "cybersecurity",
+    "question": "Who leads Apple's management of cybersecurity risk?",
+    "gold": [
+     "AAPL-10K-1C-000"
+    ],
+    "filtered_ms": 2.3467589999199845,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AAPL-10K-1C-000",
+     "AAPL-10K-1C-001",
+     "AAPL-10Q-P2-1A-013"
+    ],
+    "global_ms": 2.4605459998383594,
+    "global_rank": 1,
+    "global_top3": [
+     "AAPL-10K-1C-000",
+     "MSFT-10K-1C-006",
+     "MSFT-10K-1C-002"
+    ]
+   },
+   {
+    "id": "R31",
+    "ticker": "AAPL",
+    "topic": "results",
+    "question": "What were Apple's total net sales in the third quarter of fiscal 2026?",
+    "gold": [
+     "AAPL-10Q-P1-1-007",
+     "AAPL-10Q-P1-2-006",
+     "AAPL-10Q-P1-2-008"
+    ],
+    "filtered_ms": 3.344737999668723,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10Q-P1-2-009",
+     "AAPL-10Q-P1-2-002"
+    ],
+    "global_ms": 3.6164130001452577,
+    "global_rank": 4,
+    "global_top3": [
+     "AAPL-10Q-P1-2-007",
+     "AAPL-10Q-P1-2-009",
+     "AAPL-10Q-P1-2-002"
+    ]
+   },
+   {
+    "id": "R32",
+    "ticker": "TSLA",
+    "topic": "properties",
+    "question": "Where is Tesla headquartered?",
+    "gold": [
+     "TSLA-10K-2-000"
+    ],
+    "filtered_ms": 1.2616009998964728,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "TSLA-10K-8-122",
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10K-8-115"
+    ],
+    "global_ms": 1.168777000202681,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-15-072",
+     "NVDA-10Q-P1-1-043",
+     "NVDA-10K-1-025"
+    ]
+   },
+   {
+    "id": "R33",
+    "ticker": "TSLA",
+    "topic": "auditor",
+    "question": "How long has PricewaterhouseCoopers served as Tesla's auditor?",
+    "gold": [
+     "TSLA-10K-8-010"
+    ],
+    "filtered_ms": 2.2827829998277593,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-8-010",
+     "TSLA-10K-8-006",
+     "TSLA-10K-15-005"
+    ],
+    "global_ms": 2.3637650001546717,
+    "global_rank": 1,
+    "global_top3": [
+     "TSLA-10K-8-010",
+     "MSFT-10K-8-079",
+     "NVDA-10K-15-007"
+    ]
+   },
+   {
+    "id": "R34",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "What were Tesla's total revenues in 2025?",
+    "gold": [
+     "TSLA-10K-7-003"
+    ],
+    "filtered_ms": 2.0838119999098126,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10Q-P1-1-001",
+     "TSLA-10K-8-012"
+    ],
+    "global_ms": 2.276356000038504,
+    "global_rank": null,
+    "global_top3": [
+     "TSLA-10Q-P1-1-057",
+     "TSLA-10Q-P1-1-001",
+     "TSLA-10K-8-012"
+    ]
+   },
+   {
+    "id": "R35",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "How did Tesla's automotive regulatory credits revenue change in 2025?",
+    "gold": [
+     "TSLA-10K-7-025"
+    ],
+    "filtered_ms": 3.0652570003439905,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "TSLA-10K-7-024",
+     "TSLA-10K-8-027",
+     "TSLA-10K-7-025"
+    ],
+    "global_ms": 3.0967640000199026,
+    "global_rank": 3,
+    "global_top3": [
+     "TSLA-10K-7-024",
+     "TSLA-10K-8-027",
+     "TSLA-10K-7-025"
+    ]
+   },
+   {
+    "id": "R36",
+    "ticker": "TSLA",
+    "topic": "results",
+    "question": "How much did Tesla's energy generation and storage revenue grow in 2025 and why?",
+    "gold": [
+     "TSLA-10K-7-026"
+    ],
+    "filtered_ms": 3.879484000208322,
+    "filtered_rank": 4,
+    "filtered_top3": [
+     "TSLA-10K-7-030",
+     "TSLA-10K-1-006",
+     "TSLA-10K-1-011"
+    ],
+    "global_ms": 3.7917610002295987,
+    "global_rank": 4,
+    "global_top3": [
+     "TSLA-10K-7-030",
+     "TSLA-10K-1-006",
+     "TSLA-10K-1-011"
+    ]
+   },
+   {
+    "id": "R37",
+    "ticker": "TSLA",
+    "topic": "products",
+    "question": "Which consumer vehicle models does Tesla currently manufacture?",
+    "gold": [
+     "TSLA-10K-1-001"
+    ],
+    "filtered_ms": 2.7774939999289927,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "TSLA-10K-1-012",
+     "TSLA-10K-1-001",
+     "TSLA-10K-1-009"
+    ],
+    "global_ms": 2.739846000167745,
+    "global_rank": 2,
+    "global_top3": [
+     "TSLA-10K-1-012",
+     "TSLA-10K-1-001",
+     "TSLA-10K-1-009"
+    ]
+   },
+   {
+    "id": "R38",
+    "ticker": "TSLA",
+    "topic": "strategy",
+    "question": "What is Tesla's strategy around AI robots such as Optimus?",
+    "gold": [
+     "TSLA-10K-7-001"
+    ],
+    "filtered_ms": 2.6505490000090504,
+    "filtered_rank": 6,
+    "filtered_top3": [
+     "TSLA-10K-8-018",
+     "TSLA-10K-1-004",
+     "TSLA-10K-1A-015"
+    ],
+    "global_ms": 2.7625400002762035,
+    "global_rank": 6,
+    "global_top3": [
+     "TSLA-10K-8-018",
+     "TSLA-10K-1-004",
+     "TSLA-10K-1A-015"
+    ]
+   },
+   {
+    "id": "R39",
+    "ticker": "TSLA",
+    "topic": "cybersecurity",
+    "question": "Which teams oversee Tesla's cybersecurity incident response?",
+    "gold": [
+     "TSLA-10K-1C-001",
+     "TSLA-10K-1C-004"
+    ],
+    "filtered_ms": 2.714261000164697,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-1C-001",
+     "TSLA-10K-1C-004",
+     "TSLA-10K-1-032"
+    ],
+    "global_ms": 2.5896530000864004,
+    "global_rank": 3,
+    "global_top3": [
+     "NVDA-10K-1C-002",
+     "AMZN-10K-1C-002",
+     "TSLA-10K-1C-001"
+    ]
+   },
+   {
+    "id": "R40",
+    "ticker": "TSLA",
+    "topic": "human_capital",
+    "question": "How many Tesla employees advanced their careers in 2025?",
+    "gold": [
+     "TSLA-10K-1-030"
+    ],
+    "filtered_ms": 2.7087789999313827,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "TSLA-10K-1-030",
+     "TSLA-10K-1-031",
+     "TSLA-10K-1-004"
+    ],
+    "global_ms": 2.918160999797692,
+    "global_rank": 1,
+    "global_top3": [
+     "TSLA-10K-1-030",
+     "AMZN-10K-1-006",
+     "TSLA-10K-1-031"
+    ]
+   },
+   {
+    "id": "R41",
+    "ticker": "AMZN",
+    "topic": "human_capital",
+    "question": "How many employees did Amazon have as of December 31, 2025?",
+    "gold": [
+     "AMZN-10K-1-005"
+    ],
+    "filtered_ms": 2.74089799995636,
+    "filtered_rank": null,
+    "filtered_top3": [
+     "AMZN-10K-15-003",
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001"
+    ],
+    "global_ms": 2.6505060000090452,
+    "global_rank": null,
+    "global_top3": [
+     "AMZN-10K-15-003",
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001"
+    ]
+   },
+   {
+    "id": "R42",
+    "ticker": "AMZN",
+    "topic": "segments",
+    "question": "What are Amazon's operating segments?",
+    "gold": [
+     "AMZN-10K-1-000",
+     "AMZN-10K-7-018",
+     "AMZN-10K-8-011",
+     "AMZN-10K-8-089",
+     "AMZN-10Q-P1-1-055",
+     "AMZN-10Q-P1-2-012"
+    ],
+    "filtered_ms": 1.731541000026482,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-1-000",
+     "AMZN-10K-8-089",
+     "AMZN-10K-8-071"
+    ],
+    "global_ms": 1.6801570000097854,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-1-000",
+     "AMZN-10K-8-089",
+     "AMZN-10K-8-071"
+    ]
+   },
+   {
+    "id": "R43",
+    "ticker": "AMZN",
+    "topic": "results",
+    "question": "How much did AWS sales grow in 2025?",
+    "gold": [
+     "AMZN-10K-7-021"
+    ],
+    "filtered_ms": 2.3078599997461424,
+    "filtered_rank": 10,
+    "filtered_top3": [
+     "AMZN-10K-7-020",
+     "AMZN-10K-5-000",
+     "AMZN-10Q-P1-2-014"
+    ],
+    "global_ms": 2.3807149996173393,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-1A-037",
+     "AMZN-10K-7-020",
+     "AMZN-10K-5-000"
+    ]
+   },
+   {
+    "id": "R44",
+    "ticker": "AMZN",
+    "topic": "results",
+    "question": "What was AWS sales growth in Q3 2026?",
+    "gold": [
+     "AMZN-10Q-P1-2-015"
+    ],
+    "filtered_ms": 4.726428000140004,
+    "filtered_rank": 2,
+    "filtered_top3": [
+     "AMZN-10Q-P1-2-014",
+     "AMZN-10Q-P1-2-015",
+     "AMZN-10Q-P1-2-025"
+    ],
+    "global_ms": 2.9311119997146307,
+    "global_rank": 2,
+    "global_top3": [
+     "AMZN-10Q-P1-2-014",
+     "AMZN-10Q-P1-2-015",
+     "AMZN-10Q-P1-2-025"
+    ]
+   },
+   {
+    "id": "R45",
+    "ticker": "AMZN",
+    "topic": "properties",
+    "question": "Where are Amazon's corporate headquarters?",
+    "gold": [
+     "AMZN-10K-2-000"
+    ],
+    "filtered_ms": 1.9837449999613455,
+    "filtered_rank": 3,
+    "filtered_top3": [
+     "AMZN-10Q-P1-1-035",
+     "AMZN-10K-1-007",
+     "AMZN-10K-2-000"
+    ],
+    "global_ms": 1.8277680001119734,
+    "global_rank": null,
+    "global_top3": [
+     "NVDA-10K-2-000",
+     "AAPL-10K-2-000",
+     "MSFT-10K-2-000"
+    ]
+   },
+   {
+    "id": "R46",
+    "ticker": "AMZN",
+    "topic": "capital_return",
+    "question": "What is the size of Amazon's stock repurchase program authorized in March 2022?",
+    "gold": [
+     "AMZN-10K-8-077",
+     "AMZN-10Q-P1-1-047"
+    ],
+    "filtered_ms": 4.247323000072356,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10Q-P1-1-047",
+     "AMZN-10K-8-077",
+     "AMZN-10K-8-011"
+    ],
+    "global_ms": 3.5830280003210646,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10Q-P1-1-047",
+     "AMZN-10K-8-077",
+     "NVDA-10K-7-024"
+    ]
+   },
+   {
+    "id": "R47",
+    "ticker": "AMZN",
+    "topic": "guidance",
+    "question": "How do Amazon Leo costs affect Amazon's first quarter 2026 operating income guidance?",
+    "gold": [
+     "AMZN-10K-7-037"
+    ],
+    "filtered_ms": 4.68667999984973,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-7-037",
+     "AMZN-10Q-P1-2-030",
+     "AMZN-10K-8-071"
+    ],
+    "global_ms": 4.688869999881717,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-7-037",
+     "AMZN-10Q-P1-2-030",
+     "AMZN-10K-8-071"
+    ]
+   },
+   {
+    "id": "R48",
+    "ticker": "AMZN",
+    "topic": "auditor",
+    "question": "Which firm is Amazon's independent registered public accounting firm?",
+    "gold": [
+     "AMZN-10K-15-000",
+     "AMZN-10K-8-001",
+     "AMZN-10K-8-006",
+     "AMZN-10K-9A-005"
+    ],
+    "filtered_ms": 3.1219659999806026,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-8-001",
+     "AMZN-10K-15-000",
+     "AMZN-10K-9A-002"
+    ],
+    "global_ms": 3.001028999733535,
+    "global_rank": 2,
+    "global_top3": [
+     "TSLA-10K-8-000",
+     "AMZN-10K-8-001",
+     "AMZN-10K-15-000"
+    ]
+   },
+   {
+    "id": "R49",
+    "ticker": "AMZN",
+    "topic": "cybersecurity",
+    "question": "To whom does the head of Amazon's security team report?",
+    "gold": [
+     "AMZN-10K-1C-002"
+    ],
+    "filtered_ms": 2.3390819997075596,
+    "filtered_rank": 1,
+    "filtered_top3": [
+     "AMZN-10K-1C-002",
+     "AMZN-10K-1C-001",
+     "AMZN-10K-1-006"
+    ],
+    "global_ms": 2.385051000146632,
+    "global_rank": 1,
+    "global_top3": [
+     "AMZN-10K-1C-002",
+     "AAPL-10K-1C-000",
+     "AAPL-10K-1C-001"
+    ]
+   }
+  ]
+ }
+}

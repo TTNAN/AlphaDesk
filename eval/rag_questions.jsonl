@@ -1,0 +1,49 @@
+{"id": "R01", "ticker": "NVDA", "question": "How many employees did NVIDIA have at the end of fiscal year 2026?", "answer_span": "approximately 42,000 employees", "topic": "human_capital"}
+{"id": "R02", "ticker": "NVDA", "question": "Which independent accounting firm audited NVIDIA's internal control over financial reporting?", "answer_span": "audited by PricewaterhouseCoopers LLP", "topic": "auditor"}
+{"id": "R03", "ticker": "NVDA", "question": "Where is NVIDIA's corporate headquarters located?", "answer_span": "Our headquarters is in Santa Clara, California", "topic": "properties"}
+{"id": "R04", "ticker": "NVDA", "question": "How much stock repurchase authorization did NVIDIA have remaining as of January 25, 2026?", "answer_span": "repurchase up to $58.5 billion", "topic": "capital_return"}
+{"id": "R05", "ticker": "NVDA", "question": "What percentage of NVIDIA total revenue came from its largest direct customer in fiscal 2026?", "answer_span": "sales to one direct customer represented 22% of total revenue", "topic": "concentration"}
+{"id": "R06", "ticker": "NVDA", "question": "What charge did NVIDIA record after the US government required a license for H20 exports to China?", "answer_span": "we incurred a $4.5 billion charge", "topic": "export_control"}
+{"id": "R07", "ticker": "NVDA", "question": "What was NVIDIA's total revenue for fiscal year 2026 and how fast did it grow?", "answer_span": "Revenue for fiscal year 2026 was $215.9 billion", "topic": "results"}
+{"id": "R08", "ticker": "NVDA", "question": "How did NVIDIA change its quarterly dividend per share in May 2026?", "answer_span": "increased our quarterly cash dividend", "topic": "capital_return"}
+{"id": "R09", "ticker": "NVDA", "question": "Which executive oversees NVIDIA's cybersecurity risk management and who do they report to?", "answer_span": "designated a Chief Security Officer", "topic": "cybersecurity"}
+{"id": "R10", "ticker": "NVDA", "question": "What share of NVIDIA revenue in the second quarter of fiscal 2027 came from customers headquartered outside the United States?", "answer_span": "headquartered outside of the United States accounted for 38", "topic": "geography"}
+{"id": "R11", "ticker": "MSFT", "question": "How many full-time employees did Microsoft have as of June 30, 2026?", "answer_span": "employed approximately 223,000 people", "topic": "human_capital"}
+{"id": "R12", "ticker": "MSFT", "question": "Which accounting firm audits Microsoft's financial statements?", "answer_span": "Deloitte & Touche LLP", "topic": "auditor"}
+{"id": "R13", "ticker": "MSFT", "question": "Where are Microsoft's corporate headquarters?", "answer_span": "corporate headquarters are located in Redmond", "topic": "properties"}
+{"id": "R14", "ticker": "MSFT", "question": "What are Microsoft's reportable operating segments?", "answer_span": "Productivity and Business Processes, Intelligent Cloud, and More Personal Computing", "topic": "segments"}
+{"id": "R15", "ticker": "MSFT", "question": "Describe Microsoft's partnership with OpenAI.", "answer_span": "long-term strategic partnership with OpenAI", "topic": "strategy"}
+{"id": "R16", "ticker": "MSFT", "question": "How much did Microsoft Cloud revenue grow in fiscal year 2026?", "answer_span": "Microsoft Cloud revenue increased 27% to $214.4 billion", "topic": "results"}
+{"id": "R17", "ticker": "MSFT", "question": "How fast did Azure revenue grow in the first quarter of fiscal year 2027?", "answer_span": "Azure revenue increased 48%", "topic": "results"}
+{"id": "R18", "ticker": "MSFT", "question": "Who presents cybersecurity topics to Microsoft's Board of Directors?", "answer_span": "Chief Information Security Officer", "topic": "cybersecurity"}
+{"id": "R19", "ticker": "MSFT", "question": "By how much did Microsoft's total revenue increase in fiscal year 2026 compared with fiscal 2025?", "answer_span": "Revenue increased $50.1 billion or 18%", "topic": "results"}
+{"id": "R20", "ticker": "MSFT", "question": "What was Microsoft's commercial remaining performance obligation at the end of Q1 fiscal 2027?", "answer_span": "increased 73% to $677 billion", "topic": "backlog"}
+{"id": "R21", "ticker": "AAPL", "question": "How many full-time equivalent employees did Apple have as of September 26, 2026?", "answer_span": "approximately 167,000 full-time equivalent employees", "topic": "human_capital"}
+{"id": "R22", "ticker": "AAPL", "question": "Who is Apple's independent auditor and since when?", "answer_span": "auditor since 2009", "topic": "auditor"}
+{"id": "R23", "ticker": "AAPL", "question": "Where is Apple headquartered?", "answer_span": "headquarters is located in Cupertino, California", "topic": "properties"}
+{"id": "R24", "ticker": "AAPL", "question": "How many shares did Apple repurchase during fiscal 2026 and for how much?", "answer_span": "repurchased 297 million shares", "topic": "capital_return"}
+{"id": "R25", "ticker": "AAPL", "question": "What are Apple's reportable geographic segments?", "answer_span": "Americas, Europe, Greater China, Japan and Rest of Asia Pacific", "topic": "segments"}
+{"id": "R26", "ticker": "AAPL", "question": "What were Apple's Greater China net sales in fiscal 2026?", "answer_span": "Greater China 82,378", "topic": "geography"}
+{"id": "R27", "ticker": "AAPL", "question": "Why did iPhone net sales increase in fiscal 2026?", "answer_span": "higher net sales of Pro models", "topic": "results"}
+{"id": "R28", "ticker": "AAPL", "question": "What drove growth in Apple's Services net sales?", "answer_span": "higher net sales from advertising and cloud services", "topic": "results"}
+{"id": "R29", "ticker": "AAPL", "question": "What happened with the Supreme Court and IEEPA tariffs according to Apple's 10-K?", "answer_span": "Supreme Court issued a ruling striking down certain tariffs", "topic": "tariffs"}
+{"id": "R30", "ticker": "AAPL", "question": "Who leads Apple's management of cybersecurity risk?", "answer_span": "led by its Head of Corporate Information Security", "topic": "cybersecurity"}
+{"id": "R31", "ticker": "AAPL", "question": "What were Apple's total net sales in the third quarter of fiscal 2026?", "answer_span": "Total net sales $ 109,417", "topic": "results"}
+{"id": "R32", "ticker": "TSLA", "question": "Where is Tesla headquartered?", "answer_span": "headquartered in Austin, Texas", "topic": "properties"}
+{"id": "R33", "ticker": "TSLA", "question": "How long has PricewaterhouseCoopers served as Tesla's auditor?", "answer_span": "auditor since 2005", "topic": "auditor"}
+{"id": "R34", "ticker": "TSLA", "question": "What were Tesla's total revenues in 2025?", "answer_span": "total revenues of $94.83 billion", "topic": "results"}
+{"id": "R35", "ticker": "TSLA", "question": "How did Tesla's automotive regulatory credits revenue change in 2025?", "answer_span": "regulatory credits revenue decreased $770 million", "topic": "results"}
+{"id": "R36", "ticker": "TSLA", "question": "How much did Tesla's energy generation and storage revenue grow in 2025 and why?", "answer_span": "Energy generation and storage revenue increased $2.69 billion", "topic": "results"}
+{"id": "R37", "ticker": "TSLA", "question": "Which consumer vehicle models does Tesla currently manufacture?", "answer_span": "five different consumer vehicles", "topic": "products"}
+{"id": "R38", "ticker": "TSLA", "question": "What is Tesla's strategy around AI robots such as Optimus?", "answer_span": "develop and commercialize AI robots (including Optimus)", "topic": "strategy"}
+{"id": "R39", "ticker": "TSLA", "question": "Which teams oversee Tesla's cybersecurity incident response?", "answer_span": "Information Security, Product Security, Compliance and Legal teams", "topic": "cybersecurity"}
+{"id": "R40", "ticker": "TSLA", "question": "How many Tesla employees advanced their careers in 2025?", "answer_span": "over 29,000 employees globally advancing their careers", "topic": "human_capital"}
+{"id": "R41", "ticker": "AMZN", "question": "How many employees did Amazon have as of December 31, 2025?", "answer_span": "approximately 1,576,000 full-time and part-time employees", "topic": "human_capital"}
+{"id": "R42", "ticker": "AMZN", "question": "What are Amazon's operating segments?", "answer_span": "organized our operations into three segments", "topic": "segments"}
+{"id": "R43", "ticker": "AMZN", "question": "How much did AWS sales grow in 2025?", "answer_span": "AWS sales increased 20% in 2025", "topic": "results"}
+{"id": "R44", "ticker": "AMZN", "question": "What was AWS sales growth in Q3 2026?", "answer_span": "AWS sales increased 39% in Q3 2026", "topic": "results"}
+{"id": "R45", "ticker": "AMZN", "question": "Where are Amazon's corporate headquarters?", "answer_span": "Puget Sound region and Arlington, Virginia", "topic": "properties"}
+{"id": "R46", "ticker": "AMZN", "question": "What is the size of Amazon's stock repurchase program authorized in March 2022?", "answer_span": "repurchase up to $ 10.0 billion", "topic": "capital_return"}
+{"id": "R47", "ticker": "AMZN", "question": "How do Amazon Leo costs affect Amazon's first quarter 2026 operating income guidance?", "answer_span": "Amazon Leo costs", "topic": "guidance"}
+{"id": "R48", "ticker": "AMZN", "question": "Which firm is Amazon's independent registered public accounting firm?", "answer_span": "Ernst & Young LLP", "topic": "auditor"}
+{"id": "R49", "ticker": "AMZN", "question": "To whom does the head of Amazon's security team report?", "answer_span": "reports directly to the Chief Executive Officer", "topic": "cybersecurity"}
