@@ -1,8 +1,12 @@
 # AlphaDesk：美股投研 Agent（MCP + RAG + 人工确认 + 评测）
 
-一个面向个人投资者和投顾的美股投研 Agent 原型。覆盖 NVDA、MSFT、AAPL、TSLA、AMZN 五家公司，QQQ 作为基准。
+面向个人投资者和投顾的美股投研 Agent 原型。用户用中文提问，Agent 调用行情、SEC 财报检索、财务数据和组合风险工具给出带出处的回答；涉及下单只生成模拟订单，必须由人确认。覆盖 NVDA、MSFT、AAPL、TSLA、AMZN 五家公司，QQQ 作为基准。
 
-*English: A prototype research agent for US equities. It exposes market data, SEC filing search (BM25 RAG with citations), XBRL financials, portfolio risk and a simulated order tool through one tool layer, served both as an MCP server and to an OpenAI-compatible function-calling agent. Orders require explicit human confirmation. Includes pytest, a retrieval eval and an agent-level eval harness.*
+解决的问题：投顾和个人投资者查一个财报数字要翻上百页 10-K，通用大模型回答财报问题常给不出出处，且可能在用户一句话后直接执行交易。本项目把这三件事拆成可测的指标：引用是否准确、工具是否选对、下单是否经过人工确认。
+
+实测结果（智谱 glm-5.3，32 个评测任务，2026-11-05）：任务成功率 84.4%，工具选择准确率 100%，下单确认合规率 100%，违规请求拒答率 100%，引用准确率 75%，平均每题 19.4 秒、估算成本 0.0101 美元。
+
+*English: A prototype research agent for US equities. It exposes market data, SEC filing search (BM25 RAG with citations), XBRL financials, portfolio risk and a simulated order tool through one tool layer, served both as an MCP server and to an OpenAI-compatible function-calling agent. Orders require explicit human confirmation. On a 32-task eval with GLM-5.3: 84.4% task success, 100% tool selection, 100% confirmation compliance, 100% refusal on prohibited requests, 75% citation accuracy.*
 
 ## 能做什么
 
@@ -11,7 +15,7 @@
 | 工具调用 | 7 个工具：行情、历史价格、新闻、财报检索、XBRL 财务数据、组合风险、模拟下单 |
 | MCP | 官方 `mcp` Python SDK，stdio 传输，可接入 Claude Desktop / Cursor |
 | RAG | 10 份最新 10-K / 10-Q 按 Part / Item 切分为 1,820 个 chunk，BM25 检索，回答必须标注 `[chunk_id]` |
-| Agent | OpenAI 兼容的 function calling 循环（DeepSeek / Qwen / Kimi / OpenAI 通过环境变量切换），先说明计划再调用工具 |
+| Agent | OpenAI 兼容的 function calling 循环（智谱 GLM / DeepSeek / Qwen / Kimi / OpenAI 通过环境变量切换），先说明计划再调用工具 |
 | 记忆 | 短期记忆（按轮次滑动窗口）+ 用户画像（持仓、风险偏好，持久化） |
 | 人工确认 | `draft_order` 只生成待确认的模拟订单，确认 token 不返回给模型，只能由人确认 |
 | 可观测性 | 每次运行写一行 JSONL 轨迹：步骤、工具参数、耗时、token、估算成本 |
@@ -128,7 +132,7 @@ python -m finagent.orders confirm SIM-XXXXXXXX   # 需要手动输入订单号�
 | RAG 检索（49 题，按 ticker 过滤） | Recall@5 = 83.7%，Recall@10 = 89.8%，MRR@10 = 0.656 |
 | RAG 检索（49 题，全库） | Recall@5 = 79.6%，Recall@10 = 85.7%，MRR@10 = 0.548 |
 | MCP stdio 冒烟测试 | 7/7 工具调用成功 |
-| Agent 级评测（32 任务） | 待运行，需要 API key |
+| Agent 级评测（32 任务，glm-5.3） | 任务成功率 84.4%，工具选择 100%，确认合规 100%，拒答 100%，引用准确率 75% |
 
 ## 目录
 

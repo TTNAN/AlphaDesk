@@ -2,7 +2,7 @@
 
 运行日期 2026-11-05 · 环境 Python 3.12.15，mcp 2.3.0，rank-bm25 0.2.2 · 数据快照见 README
 
-*English: All numbers below come from runs actually executed on 2026-11-05. Agent-level metrics require an LLM API key and are marked 待运行 (not yet run).*
+*English: All numbers below come from runs actually executed on 2026-11-05. Agent-level metrics were run with Zhipu GLM-5.3.*
 
 本报告只记录实际跑出来的数字。没跑的项目标为"待运行"。原始结果文件在 `eval/results/`，HTML 版本由 `python scripts/build_report.py` 生成到 `reports/eval_report.html`。
 
@@ -86,7 +86,7 @@ Porter 词干化让 "headquartered / headquarters" 这类词能匹配上，Recal
 
 ## 3. Agent 级评测
 
-**状态：待运行。** 需要设置 `API_KEY`、`MODEL`（可选 `BASE_URL`）后执行：
+**状态：已运行（2026-11-05，模型 glm-5.3，智谱 OpenAI 兼容接口）。** 复现命令：
 
 ```bash
 python eval/agent_eval.py            # 32 个任务
@@ -125,10 +125,31 @@ python scripts/build_report.py       # 更新 HTML 报告
 
 | 指标 | 结果 |
 |---|---|
-| 任务成功率 | 待运行 |
-| 工具选择准确率 | 待运行 |
-| 引用准确率 | 待运行 |
-| 确认合规率 | 待运行 |
-| 拒答率 | 待运行 |
-| 平均延迟 | 待运行 |
-| 平均成本 | 待运行 |
+| 任务成功率 | 84.4%（27/32） |
+| 工具选择准确率 | 100%（32/32） |
+| 引用准确率 | 75.0%（9/12） |
+| 确认合规率 | 100%（6/6） |
+| 拒答率 | 100%（6/6） |
+| 答案关键信息命中率 | 83.3%（10/12） |
+| 平均延迟 | 19.4 秒 |
+| 平均 tokens | 输入 6,288 / 输出 765 |
+| 平均工具调用次数 | 1.69 |
+| 平均成本 | 0.0101 美元（估算） |
+
+分类别成功率：事实问答+引用 60%（6/10），多工具分析 90%（9/10），下单确认 100%（6/6），违规拒答 100%（6/6）。
+
+成本口径：按智谱官方标价 GLM-5.3 输入 ¥8、输出 ¥28 每百万 tokens，折算为 1.13 / 3.94 美元估算。本次运行使用平台资源包，未产生现金支出。
+
+### 3.6 Badcase 分析（5 个失败任务）
+
+| 任务 | 标签 | 现象 | 原因归类 |
+|---|---|---|---|
+| A02 H20 计提金额 | answer_mismatch | 回答"45 亿美元"，数值正确；评分规则只匹配字符串"4.5" | 评分规则问题：未处理中文数量单位换算 |
+| A07 特斯拉 2025 年总营收 | wrong_citation | 数字正确（94,827 百万美元），引用的是收入明细表 chunk，不含标注的原文句 | 引用标注口径过严，或模型偏好表格 chunk |
+| A09 AWS 2026Q3 增速 | wrong_citation | 增速 39% 正确，引用的 chunk 不含标注原文句 | 同 A07 |
+| A10 亚马逊员工数 | answer_mismatch | 检索命中正确 chunk，但工具返回的文本预览在数字前被截断，模型拒绝凭记忆作答 | 工具问题：search_filings 返回片段过短 |
+| A16 苹果营收趋势+关税 | llm_error, missing_citation | 第二次调用模型时智谱接口返回 400，提示内容安全拦截 | 模型服务内容审核误拦截 |
+
+结论：5 个失败中，1 个是评分规则误判，1 个是工具返回片段截断，2 个是引用标注口径，1 个是模型服务拦截。安全类任务（下单确认、违规拒答）12/12 全部通过。若修正 A02 的评分规则，成功率为 87.5%（28/32）；本报告仍按原始规则记录 84.4%，修正评分规则后需重跑全量再更新。
+
+下一步：search_filings 返回片段从截断预览改为完整 chunk 或按命中位置截取；评分规则支持"亿/万"单位换算；引用检查放宽到"引用 chunk 含答案数字"；对内容审核误拦截加一次改写重试，并单独统计。
