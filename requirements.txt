@@ -1,0 +1,11 @@
+# 开发与测试环境：Python 3.12，mcp 2.3.0（代码同时兼容 mcp 1.x 的 FastMCP）
+mcp>=1.2
+openai>=1.40
+rank-bm25>=0.2.2
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+numpy>=1.26
+pytest>=8.0
+# 可选：仅 RAG 消融实验（porter 词干化）需要
+nltk>=3.8

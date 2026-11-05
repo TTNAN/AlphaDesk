@@ -1,0 +1,109 @@
+{
+ "ticker": "AAPL",
+ "source": "yahoo_rss",
+ "fetched_at": "2026-11-05T05:18:54+00:00",
+ "items": [
+  {
+   "title": "Dow Jones Futures Rise, Techs Fall; Apple, Microsoft, Amazon Flash Buy Signals In Postelection Rally",
+   "link": "https://finance.yahoo.com/m/a147bf9a-4218-3171-97a4-fb80fda211eb/dow-jones-futures-rise%2C-techs.html?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 04:04:28 +0000",
+   "summary": "Elections and diving oil prices sparked a stock market surge. Stocks from many sectors flash buy signals, but avoid this area."
+  },
+  {
+   "title": "Apple CEO Says Memory Prices Are ‘Unprecedented’ and Could Keep Climbing — iPhone, Mac and iPad Costs Face Fresh Pressure After Recent Price Hikes",
+   "link": "https://finance.yahoo.com/technology/articles/apple-ceo-says-memory-prices-233012502.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 23:30:12 +0000",
+   "summary": "Apple Inc. warned that rapidly rising memory prices continues to increase pressure on product costs, after the company already raised prices across several hardware categories. CEO John Ternus, during its fiscal fourth-quarter earnings call, said, \"What we’re seeing with memory..."
+  },
+  {
+   "title": "Apple Reportedly Tightens The Belt On Employee AI Budgets Amid Cost-Cutting Drive",
+   "link": "https://stocktwits.com/news-articles/markets/equity/apple-reportedly-tightens-the-belt-on-employee-ai-budgets-amid-cost-cutting-drive/cNGL8Z8R9EG?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:35:25 +0000",
+   "summary": "Apple Inc. is scaling back daily AI usage budgets for engineers and staff as part of a broader push to trim corporate spending, Bloomberg reported."
+  },
+  {
+   "title": "Apple’s Siri AI Could Become a Paid Upgrade — CEO John Ternus Reveals Plans to Charge for More Server-Side Apple Intelligence Usage",
+   "link": "https://finance.yahoo.com/technology/ai/articles/apple-siri-ai-could-become-213018500.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:30:18 +0000",
+   "summary": "Apple Inc. plans to let users buy additional capacity for Siri AI and other Apple Intelligence features that rely on server-side models after usage limits are introduced, CEO John Ternus said during the company’s fourth-quarter earnings call. Apple Eyes Paid..."
+  },
+  {
+   "title": "The Apple Supply Chain Faces Its Biggest Test Yet",
+   "link": "https://finance.yahoo.com/m/bc49a9ba-6921-3e49-8174-aed50fc0fcf9/the-apple-supply-chain-faces.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:10:00 +0000",
+   "summary": "Apple’s supply chain excellence has enabled it to weather the memory shortage, but this is no ordinary chip cycle."
+  },
+  {
+   "title": "Arm stock slips after hours as lack of blowout guidance offsets quarterly results",
+   "link": "https://finance.yahoo.com/technology/ai/articles/arm-stock-slips-hours-lack-213203690.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:32:03 +0000",
+   "summary": "Investing.com -- Arm on Wednesday delivered a quarterly top- and bottom-line beat, but its current quarter profit and revenue guidance failed to comfortably beat expectations."
+  },
+  {
+   "title": "S&P 500, Nasdaq Surge Ahead After Democratic Sweep, Dow Jumps To One-Year High On Lower Oil — AAPL, SNAP, INTC, CRWV, QCOM In Focus",
+   "link": "https://stocktwits.com/news-articles/markets/equity/s-and-p-500-nasdaq-dow-surge-ahead-after-democratic-sweep/cNGLApkR9ET?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 23:32:33 +0000",
+   "summary": "Democrats won the mid-term elections, with analysts looking at the political gridlock as a win for markets."
+  },
+  {
+   "title": "Why an equal-weight S&P 500 fund can reduce Big Tech risk",
+   "link": "https://www.thestreet.com/investing/why-an-equal-weight-sp-500-fund-can-reduce-big-tech-risk?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 22:54:08 +0000",
+   "summary": "Big Tech dominates traditional S&P 500 index funds. Investment expert Dryden Pence explains how equal weighting can help investors diversify their portfolios."
+  },
+  {
+   "title": "Qualcomm’s Stock Falls After It Warns Chip Margins Are Getting Squeezed",
+   "link": "https://finance.yahoo.com/m/1c74714d-b3e8-378c-98a9-4f7059eb768b/qualcomm%E2%80%99s-stock-falls-after.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 22:27:00 +0000",
+   "summary": "Qualcomm reported better-than-expected revenue but warned of weaker margins ahead in its chip-design segment."
+  },
+  {
+   "title": "Dow Rallies 1,590 Points on Midterm Relief: Stock Market Today",
+   "link": "https://www.kiplinger.com/investing/stocks/dow-rallies-1-570-points-on-midterm-relief-stock-market-today?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:12:48 +0000",
+   "summary": "Stocks of just about all sectors and sizes rose in the wake of a \"blue wave\" that resolved midterm election uncertainty. But AI and oil are still big variables."
+  },
+  {
+   "title": "The Nasdaq-100 Is Outperforming Nvidia, Microsoft, Amazon, Meta Platforms, Alphabet, and Tesla This Year. Here's My Favorite Low-Cost ETF to Buy the Dip.",
+   "link": "https://www.fool.com/investing/2026/11/04/the-nasdaq-100-is-outperforming-nvidia-microsoft-a/?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:05:00 +0000",
+   "summary": "Many megacap growth stocks are underperforming the major indexes this year."
+  },
+  {
+   "title": "Dow Heads for Best Post-Midterm Peformance in Decades",
+   "link": "https://finance.yahoo.com/m/280f9056-9586-3201-ac6c-cdb248e692b6/dow-heads-for-best.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 20:34:46 +0000",
+   "summary": "The Dow was on track for its best post-midterm performance since 1982."
+  },
+  {
+   "title": "Apple reportedly lowers daily AI spending limits for engineers",
+   "link": "https://finance.yahoo.com/technology/ai/articles/apple-reportedly-lowers-daily-ai-203245096.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 20:32:45 +0000",
+   "summary": "Investing.com -- Apple Inc. is reducing employee budgets for artificial intelligence usage as part of a cost-cutting effort, even as the company seeks to put AI at the center of its operations."
+  },
+  {
+   "title": "Arm Stock Has Crashed 37%. Is It a Better Buy Than Qualcomm?",
+   "link": "https://247wallst.com/investing/2026/11/04/arm-stock-has-crashed-37-is-it-a-better-buy-than-qualcomm/?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 20:17:42 +0000",
+   "summary": "Arm has shed more than a third of its value in a single month while Qualcomm stumbles through a handset slump, and both companies report earnings tonight. Which chip stock actually holds up better when the pressure is on?"
+  },
+  {
+   "title": "Your Adviser Retired and Handed the Accounts Back at 71? These 3 ETFs Are a Portfolio You Can Run Yourself",
+   "link": "https://247wallst.com/investing/etf/2026/11/04/your-adviser-retired-and-handed-the-accounts-back-at-71-these-3-etfs-are-a-portfolio-you-can-run-yourself/?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 20:03:21 +0000",
+   "summary": "When your adviser retires, the accounts do not retire with them, and at 71, figuring out what to do next carries real stakes. Three broad funds from State Street suggest a path, but the trade-offs involved deserve a hard look before you commit."
+  },
+  {
+   "title": "The Mag 7 Just Got a $600B Blue-Wave Surprise",
+   "link": "https://finance.yahoo.com/m/d58819ae-9dfd-369b-865e-0165dc6e99c5/the-mag-7-just-got-a-%24600b.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 19:55:00 +0000",
+   "summary": "Nvidia, Apple, Meta Platforms, Amazon.com, Tesla, Alphabet, and Microsoft were on track for their tenth largest combined one-day valuation gain ever."
+  },
+  {
+   "title": "Apple Makes Big Push to Turn Siri Into an AI Platform",
+   "link": "https://finance.yahoo.com/technology/ai/articles/apple-makes-big-push-turn-195002429.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 19:50:02 +0000",
+   "summary": "Apple wants Siri to become a broader interface across third-party apps."
+  }
+ ]
+}

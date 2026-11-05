@@ -1,0 +1,12 @@
+{
+ "form": "10-K",
+ "accession": "0001018724-26-000004",
+ "filing_date": "2026-02-06",
+ "report_date": "2025-12-31",
+ "primary_doc": "amzn-20251231.htm",
+ "ticker": "AMZN",
+ "company": "Amazon.com Inc",
+ "cik": "0001018724",
+ "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+ "fetched_at": "2026-11-05T05:19:10+00:00"
+}

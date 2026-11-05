@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+.DS_Store
+.idea/
+.vscode/
+
+# 运行时产物
+traces/
+data/orders/
+data/user_profile.json
+data/index/
+
+# Agent 评测原始轨迹可能较大，汇总结果单独保存
+eval/results/agent_eval_raw*.json

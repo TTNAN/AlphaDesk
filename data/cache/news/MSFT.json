@@ -1,0 +1,91 @@
+{
+ "ticker": "MSFT",
+ "source": "yahoo_rss",
+ "fetched_at": "2026-11-05T05:18:54+00:00",
+ "items": [
+  {
+   "title": "Yealink Brings Global Industry Leaders Together to Shape the Future of AI-Powered Workplaces",
+   "link": "https://finance.yahoo.com/technology/ai/articles/yealink-brings-global-industry-leaders-041500698.html?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 04:15:00 +0000",
+   "summary": "Yealink successfully hosted the Workplace Forward Summit at BMW Welt in Munich, bringing together 400 industry leaders, technology experts, enterprise customers and channel partners from across the global collaboration ecosystem. Representatives from leading technology companies, including Microsoft and Qualcomm; industry organizations such as AVIXA; Frost & Sullivan analysts; and leading system i"
+  },
+  {
+   "title": "Dow Jones Futures Rise, Techs Fall; Apple, Microsoft, Amazon Flash Buy Signals In Postelection Rally",
+   "link": "https://finance.yahoo.com/m/a147bf9a-4218-3171-97a4-fb80fda211eb/dow-jones-futures-rise%2C-techs.html?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 04:04:28 +0000",
+   "summary": "Elections and diving oil prices sparked a stock market surge. Stocks from many sectors flash buy signals, but avoid this area."
+  },
+  {
+   "title": "Stock Market Today: Dow Soars 1,569 Points In postelection Rally; Microsoft Leaps Nearly 7% Off New Entry",
+   "link": "https://finance.yahoo.com/m/762d358c-ec5a-3821-a3f9-e47c4e4c3f0c/stock-market-today%3A-dow-soars.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:47:54 +0000",
+   "summary": "The Dow Jones index surged 3% Wednesday following election results. Elon Musk-led SpaceX and Tesla dive."
+  },
+  {
+   "title": "Arm stock slips after hours as lack of blowout guidance offsets quarterly results",
+   "link": "https://finance.yahoo.com/technology/ai/articles/arm-stock-slips-hours-lack-213203690.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:32:03 +0000",
+   "summary": "Investing.com -- Arm on Wednesday delivered a quarterly top- and bottom-line beat, but its current quarter profit and revenue guidance failed to comfortably beat expectations."
+  },
+  {
+   "title": "After the midterms, Big Tech’s AI data center problem is only getting bigger",
+   "link": "https://finance.yahoo.com/technology/ai/articles/midterms-big-tech-ai-data-211836294.html?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:18:36 +0000",
+   "summary": "On Tuesday, U.S. voters delivered an overwhelming victory for Democratic candidates throughout the country that will upend the halls of power in Washington and data center hotbeds like Texas."
+  },
+  {
+   "title": "IREN Stock Drops After Report Says It’s Behind Microsoft’s AI Spending Delay, As Investors Turn To Earnings",
+   "link": "https://stocktwits.com/news-articles/markets/equity/iren-stock-drops-after-report-says-it-s-behind-microsoft-s-ai-spending-delay-as-investors-turn-to-earnings/cNG15gfR9Ef?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 03:53:14 +0000",
+   "summary": "Microsoft ended up spending less than expected on capital expenditures last quarter and blamed delays in certain third-party capacity coming online."
+  },
+  {
+   "title": "Arista Networks stock gets fresh backing from Jim Cramer and Wall Street",
+   "link": "https://www.thestreet.com/investing/stocks/arista-networks-stock-gets-fresh-backing-from-jim-cramer-and-wall-street-anet?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 00:45:05 +0000",
+   "summary": "The networking company beat earnings estimates and gave Wall Street a stronger-than-expected outlook for 2027."
+  },
+  {
+   "title": "Apple Reportedly Tightens The Belt On Employee AI Budgets Amid Cost-Cutting Drive",
+   "link": "https://stocktwits.com/news-articles/markets/equity/apple-reportedly-tightens-the-belt-on-employee-ai-budgets-amid-cost-cutting-drive/cNGL8Z8R9EG?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:35:25 +0000",
+   "summary": "Apple Inc. is scaling back daily AI usage budgets for engineers and staff as part of a broader push to trim corporate spending, Bloomberg reported."
+  },
+  {
+   "title": "IonQ vs. SoundHound AI: Which Technology Stock Is a Better Buy for 2027?",
+   "link": "https://www.fool.com/coverage/better-buy/2026/11/04/ionq-vs-soundhound-ai-which-technology-stock-is-a-better-buy-for-2027/?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 04:50:01 +0000",
+   "summary": "IonQ trades at a premium, while SoundHound AI shows a clearer path to profitability."
+  },
+  {
+   "title": "What Is Going On With Zoom Stock?",
+   "link": "https://www.trefis.com/stock/zm/articles/622277/what-is-going-on-with-zoom-stock/2026-11-04?.tsrc=rss",
+   "published": "Thu, 05 Nov 2026 00:39:01 +0000",
+   "summary": "For questions about this article or underlying research, email help@trefis.com."
+  },
+  {
+   "title": "Why an equal-weight S&P 500 fund can reduce Big Tech risk",
+   "link": "https://www.thestreet.com/investing/why-an-equal-weight-sp-500-fund-can-reduce-big-tech-risk?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 22:54:08 +0000",
+   "summary": "Big Tech dominates traditional S&P 500 index funds. Investment expert Dryden Pence explains how equal weighting can help investors diversify their portfolios."
+  },
+  {
+   "title": "Stock Market Today, Nov. 4: Oracle Falls on Canceled $7 Billion Tencent Chip-Leasing Deal",
+   "link": "https://www.fool.com/coverage/stock-market-today/2026/11/04/stock-market-today-nov-4-oracle-falls-on-canceled-7-billion-tencent-chip-leasing-deal/?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 22:20:02 +0000",
+   "summary": "On Nov. 4, 2026, Oracle shares slid in premarket trading as reports of a scrapped Tencent deal renewed focus on how it funds its AI buildout."
+  },
+  {
+   "title": "Stock Market Today, Nov. 4: Amazon Jumps 6% From New Perspective on AWS Growth and AI Strategy Following Election Results",
+   "link": "https://www.fool.com/coverage/stock-market-today/2026/11/04/stock-market-today-nov-4-amazon-jumps-6-from-new-perspective-on-aws-growth-and-ai-strategy-following-election-results/?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 22:13:28 +0000",
+   "summary": "Today, Nov. 4, 2026, investors are reweighing Amazon's earnings from last week as cloud demand and AI spending take center stage."
+  },
+  {
+   "title": "Dow Rallies 1,590 Points on Midterm Relief: Stock Market Today",
+   "link": "https://www.kiplinger.com/investing/stocks/dow-rallies-1-570-points-on-midterm-relief-stock-market-today?.tsrc=rss",
+   "published": "Wed, 04 Nov 2026 21:12:48 +0000",
+   "summary": "Stocks of just about all sectors and sizes rose in the wake of a \"blue wave\" that resolved midterm election uncertainty. But AI and oil are still big variables."
+  }
+ ]
+}
