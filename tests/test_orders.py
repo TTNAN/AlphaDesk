@@ -47,3 +47,13 @@ def test_registry_unknown_tool_and_bad_json():
     assert "error" in call_tool("nope", {})[0]
     assert "error" in call_tool("get_quote", "{bad json")[0]
     assert "error" in call_tool("get_quote", {"symbol": "NVDA"})[0]
+
+
+def test_split_orders_cannot_bypass_limit():
+    """拆成多笔小单也不能绕过单笔 10 万美元上限（开发集 A24 的 badcase）。"""
+    price = orders.load_prices("MSFT")["rows"][-1]["close"]
+    qty = int(60_000 // price)
+    orders.draft_order("MSFT", "buy", qty)
+    with pytest.raises(ValueError, match="拆单"):
+        orders.draft_order("MSFT", "buy", qty)
+    orders.draft_order("MSFT", "sell", qty)  # 反方向单独计算

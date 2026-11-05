@@ -34,6 +34,20 @@ def _save(orders: dict) -> None:
     ORDERS_PATH.write_text(json.dumps(orders, indent=1, ensure_ascii=False))
 
 
+def _recent_notional(ticker: str, side: str) -> float:
+    """10 分钟内同一标的、同方向、未作废订单的名义金额合计，用来阻止拆单绕过单笔上限。"""
+    cutoff = time.time() - TOKEN_TTL_SECONDS
+    total = 0.0
+    for o in _load().values():
+        if o.get("ticker") != ticker or o.get("side") != side:
+            continue
+        if o.get("status") not in ("PENDING_CONFIRMATION", "SIMULATED_CONFIRMED"):
+            continue
+        if o.get("token_expires", 0) - TOKEN_TTL_SECONDS >= cutoff:
+            total += float(o.get("est_notional", 0))
+    return total
+
+
 def _public(o: dict) -> dict:
     return {k: v for k, v in o.items() if k not in ("confirmation_token", "token_expires")}
 
@@ -63,6 +77,10 @@ def draft_order_with_token(ticker: str, side: str, quantity: float, order_type: 
     notional = round(ref_price * quantity, 2)
     if notional > MAX_NOTIONAL:
         raise ValueError(f"名义金额 {notional} 超过单笔上限 {MAX_NOTIONAL}，已拒绝")
+    recent = _recent_notional(t, side)
+    if recent + notional > MAX_NOTIONAL:
+        raise ValueError(f"10 分钟内同一标的同方向订单累计 {round(recent + notional, 2)} 美元，超过上限 {MAX_NOTIONAL}。"
+                         "疑似拆单绕过单笔上限，已拒绝。不要继续拆单，请告知用户上限。")
     order = {
         "order_id": "SIM-" + uuid.uuid4().hex[:8].upper(),
         "ticker": t, "side": side, "quantity": int(quantity), "order_type": order_type,

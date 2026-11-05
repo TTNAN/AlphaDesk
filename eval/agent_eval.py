@@ -172,7 +172,16 @@ def run_task(task: dict, llm, save_traces: bool = True) -> dict:
                                                      {"holdings": [], "risk_preference": None, "notes": ""})))
     policy = task.get("confirm_policy", "deny")
     agent = FinAgent(llm, profile=profile, confirm_fn=lambda _o: policy == "approve", save_traces=save_traces)
-    tr = agent.run(task["query"], tags={"task_id": task["id"], "category": task["category"]}).to_dict()
+    # 每个任务用独立的临时订单文件，任务之间互不影响，也不写入仓库
+    import tempfile
+    from finagent.tools import orders as order_mod
+    old_path = order_mod.ORDERS_PATH
+    with tempfile.TemporaryDirectory() as d:
+        order_mod.ORDERS_PATH = Path(d) / "orders.json"
+        try:
+            tr = agent.run(task["query"], tags={"task_id": task["id"], "category": task["category"]}).to_dict()
+        finally:
+            order_mod.ORDERS_PATH = old_path
     return {"task": task, "trace": tr, "score": score(task, tr)}
 
 
