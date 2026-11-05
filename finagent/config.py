@@ -18,9 +18,9 @@ PROFILE_PATH = DATA_DIR / "user_profile.json"
 
 # SEC 要求请求头带上联系方式，见 https://www.sec.gov/os/accessing-edgar-data
 SEC_USER_AGENT = os.getenv(
-    "SEC_USER_AGENT", "fin-advisor-agent research project contact@example.com"
+    "SEC_USER_AGENT", "AlphaDesk research project contact@example.com"
 )
-HTTP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) fin-advisor-agent/0.1"
+HTTP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AlphaDesk/0.1"
 
 # 标的池：5 家纳斯达克公司 + QQQ 作为 beta 基准
 COMPANIES = {

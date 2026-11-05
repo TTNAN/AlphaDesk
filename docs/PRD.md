@@ -1,4 +1,4 @@
-# PRD：美股投研 Agent（fin-advisor-agent）
+# PRD：美股投研 Agent（AlphaDesk）
 
 版本 v0.1 · 2026-11-05 · 状态：原型
 

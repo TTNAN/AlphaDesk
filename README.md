@@ -1,4 +1,4 @@
-# fin-advisor-agent：美股投研 Agent（MCP + RAG + 人工确认 + 评测）
+# AlphaDesk：美股投研 Agent（MCP + RAG + 人工确认 + 评测）
 
 一个面向个人投资者和投顾的美股投研 Agent 原型。覆盖 NVDA、MSFT、AAPL、TSLA、AMZN 五家公司，QQQ 作为基准。
 
@@ -101,9 +101,9 @@ Claude Desktop：编辑 `claude_desktop_config.json`（macOS 位于 `~/Library/A
 {
   "mcpServers": {
     "fin-advisor": {
-      "command": "/绝对路径/fin-advisor-agent/.venv/bin/python",
+      "command": "/绝对路径/AlphaDesk/.venv/bin/python",
       "args": ["-m", "finagent.mcp_server"],
-      "env": { "PYTHONPATH": "/绝对路径/fin-advisor-agent" }
+      "env": { "PYTHONPATH": "/绝对路径/AlphaDesk" }
     }
   }
 }

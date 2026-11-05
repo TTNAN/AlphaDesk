@@ -119,7 +119,7 @@ text-align:left;vertical-align:top;word-break:break-word}th{background:#f6f6f6}.
 
 
 def main() -> Path:
-    body = (f"<h1>fin-advisor-agent 评测与轨迹报告</h1><p class=muted>由 scripts/build_report.py 生成，"
+    body = (f"<h1>AlphaDesk 评测与轨迹报告</h1><p class=muted>由 scripts/build_report.py 生成，"
             f"生成时间 {config.now_iso()}。所有数字来自实际运行结果文件。</p>"
             f"<h2>1. 工具层单元测试 (pytest)</h2>{section_tests()}"
             f"<h2>2. RAG 检索评测</h2>{section_rag()}"
