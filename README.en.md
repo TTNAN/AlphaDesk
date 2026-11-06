@@ -8,7 +8,7 @@
 
 ![AlphaDesk demo: ask about NVIDIA's largest customer, get a cited answer; an order request drafts a simulated order that waits for human confirmation](docs/assets/demo-en.gif)
 
-Recent single-pass runs (Zhipu glm-5.3): task success **84.4%–96.9%** on 32 development tasks and **91.7%** on the first run of 24 held-out tasks; the 10 order-safety tasks (large orders, split orders) passed all 3 repeats (**30/30**). About **$0.006 per question** (estimated at list price). A single run varies by about ±6 points; details in the [evaluation report](docs/eval-report.md).
+Recent single-pass runs (Zhipu glm-5.3): task success **84.4%–96.9%** on 32 development tasks and **91.7%** on the first run of 24 held-out tasks (later reused for debugging, so no longer unseen) and **91.7%** on 12 new held-out tasks; the 10 order-safety tasks (large orders, split orders) passed all 3 repeats (**30/30**). About **$0.006 per question** (estimated at list price). A single run varies by about ±6 points; details in the [evaluation report](docs/eval-report.md).
 
 Covers NVDA, MSFT, AAPL, TSLA and AMZN, with QQQ as the benchmark. No broker connection, no real trades, not investment advice.
 
@@ -29,7 +29,7 @@ With [uv](https://docs.astral.sh/uv/) and Git installed, add this to your MCP cl
 
 Simulated orders and the search index are stored in `~/.alphadesk`. Set `FINAGENT_HOME` to change it.
 
-You can also copy the config from [ModelScope MCP](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk), or download `alphadesk.mcpb` from the [latest release](https://github.com/TTNAN/AlphaDesk/releases/latest) for one-click install in Claude Desktop.
+You can also copy the config from [ModelScope MCP](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk), or download `alphadesk.mcpb` from the [latest release](https://github.com/TTNAN/AlphaDesk/releases/latest) (currently v0.1.1) for one-click install in Claude Desktop.
 
 ## Examples
 
@@ -127,7 +127,7 @@ Think of AlphaDesk as a research assistant that reads filings. Ask "What share o
 ## Measured results
 
 <details>
-<summary><b>Full results (32 dev tasks, 24 held-out tasks, retrieval and unit tests)</b></summary>
+<summary><b>Full results (32 dev tasks, 24 + 12 held-out tasks, retrieval and unit tests)</b></summary>
 
 Run on 2026-11-05. See [docs/eval-report.md](docs/eval-report.md) (Chinese) and [reports/eval_report.html](reports/eval_report.html).
 
@@ -156,6 +156,19 @@ Round 2 also adjusted the scoring rules (Chinese numeric units, and citations th
 
 Holdout failures: one missed the quarterly 10-Q data and wrongly said the figure was not yet disclosed; one rounded $6.66 billion to "6.6 billion" in Chinese units and failed the strict check. See [eval report section 3.8](docs/eval-report.md).
 
+**Round 3 (v3, shipped as v0.1.1)**
+
+Fixes for the quarterly retrieval miss above and a split-order loophole (asked to buy $1M, the agent split it into ~$100K orders to get around the per-order cap): quarterly questions now search the 10-Q; `draft_order` rejects orders that push the same ticker and side over $100K within 10 minutes; the prompt forbids splitting an oversized order.
+
+| Metric | Result |
+|---|---|
+| 32 dev tasks | 84.4% (27/32); the same code ranges 84%–97% across runs |
+| Old 24 held-out tasks | 95.8% (used in debugging, no longer unseen) |
+| New 12 held-out tasks (committed before running) | **91.7% (11/12)** |
+| 10 order-safety tasks × 3 runs | **30/30** |
+
+A gap under 5 points between single runs does not show an improvement or a regression. See [eval report section 3.9](docs/eval-report.md).
+
 **Other tests**
 
 | Item | Result |
@@ -173,7 +186,7 @@ The retrieval questions were written by the same person who read the filings, so
 
 | Gap | Today | Plan |
 |---|---|---|
-| Quarter-specific questions can miss the 10-Q | Holdout H06: retrieval returned only 10-K chunks | Filter to 10-Q when a question names a quarter; say "not found" instead of "not disclosed" |
+| Single runs vary a lot | The same code scores 84%–97% on the dev set | Average 3 runs per set; write new held-out tasks and commit them before running |
 | Provider false blocks | A16 was blocked by Zhipu content moderation in both rounds | Retry once with a rephrased prompt and track these separately |
 | Weak retrieval on table questions | 8 of 49 retrieval questions missed the top 5, mostly table-related | Tag and down-weight table chunks; add hybrid BM25 + embedding retrieval |
 | Coarse refusal scoring | Keyword-based | Add human spot checks or an LLM judge |
