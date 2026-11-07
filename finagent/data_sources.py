@@ -98,10 +98,17 @@ def load_prices(ticker: str) -> dict:
     ticker = ticker.upper()
     if not config.OFFLINE:
         try:
-            return refresh_prices(ticker)
-        except Exception:
-            pass
-    return _read_json(config.PRICES_DIR / f"{ticker}.json")
+            data = refresh_prices(ticker)
+            data["refresh_status"] = "refreshed"
+            return data
+        except Exception as exc:
+            data = _read_json(config.PRICES_DIR / f"{ticker}.json")
+            data["refresh_status"] = "cached_after_refresh_failure"
+            data["refresh_error_type"] = type(exc).__name__
+            return data
+    data = _read_json(config.PRICES_DIR / f"{ticker}.json")
+    data["refresh_status"] = "offline_cache"
+    return data
 
 
 # ---------------- 新闻 ----------------
@@ -136,6 +143,8 @@ def load_news(ticker: str) -> dict:
 # ---------------- SEC ----------------
 
 def sec_get(url: str) -> requests.Response:
+    if not config.SEC_USER_AGENT:
+        raise ValueError("在线访问 SEC 需要先设置 SEC_USER_AGENT，并填写真实项目名称和联系方式")
     time.sleep(0.15)  # SEC 限速 10 req/s，这里留足余量
     return _get(url, config.SEC_USER_AGENT, timeout=40)
 

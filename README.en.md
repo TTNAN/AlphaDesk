@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-42%20passed-brightgreen)](eval/results/pytest.txt)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-64%20passed-brightgreen)](eval/results/pytest.txt)
 
 [中文](README.md) | **English**
 
@@ -111,7 +111,9 @@ Think of AlphaDesk as a research assistant that reads filings. Ask "What share o
 
 - `draft_order` returns only an order ID and the status `PENDING_CONFIRMATION`. The confirmation token never appears in any output the model can see.
 - Only the user can confirm, by running `python -m finagent.orders confirm ORDER_ID` in a local terminal.
-- Extra checks: ticker whitelist, positive whole-share quantity, limit orders need a price, $100,000 cap per order, pending orders expire after 10 minutes.
+- Extra checks: ticker whitelist, positive whole-share quantity, finite positive limit prices, a $100,000 per-order cap, and a $100,000 rolling 10-minute cap per ticker and side.
+- Market-order drafts require a close no more than 7 days old and fail closed on stale data; users can instead provide an explicit limit. Quote responses expose the date, age, and cache-refresh status.
+- The order ledger uses atomic writes and a file lock; on POSIX systems the ledger and lock are mode `0600`. Orders, profiles, and indexes default to `~/.alphadesk`, outside the source checkout.
 - There is no real trading path anywhere in the code.
 - The model refuses prohibited requests (guaranteed returns, insider information, price manipulation): 6/6 passed in the eval.
 
@@ -173,7 +175,7 @@ A gap under 5 points between single runs does not show an improvement or a regre
 
 | Item | Result |
 |---|---|
-| Unit tests (pytest) | 42/42 passed |
+| Unit tests (pytest, as of the 2026-11-05 evaluation run) | 42/42 passed |
 | Filing retrieval (49 questions, filtered by company) | Recall@5 83.7%, Recall@10 89.8%, MRR@10 0.656, about 4 ms per query |
 | Filing retrieval (49 questions, full corpus) | Recall@5 79.6% |
 | MCP smoke test | 7/7 tool calls succeeded |
@@ -320,7 +322,7 @@ finagent/
   cli.py               CLI entry point
 eval/                  retrieval questions, agent tasks, eval scripts, results
 scripts/               data fetch, index build, MCP smoke test, report build
-tests/                 42 unit tests
+tests/                 64 unit tests
 docs/                  PRD, eval report
 data/cache/            offline data snapshot
 ```
@@ -336,7 +338,7 @@ data/cache/            offline data snapshot
 | Yahoo Finance | Daily prices, company news |
 | Eastmoney | Backup daily prices |
 
-Refresh data (needs network; SEC requires a User-Agent with contact info):
+Refresh data (needs network; SEC access requires an explicitly configured real project name and contact address; there is no placeholder default):
 
 ```powershell
 $env:SEC_USER_AGENT="your-name your@email.com"

@@ -2,7 +2,7 @@
 
     python -m finagent.cli chat                 # 交互式对话（需要 API_KEY / MODEL）
     python -m finagent.cli ask "NVDA 最大客户占比多少？"
-    python -m finagent.cli tools                # 不需要 API key，直接演示工具层
+    python -m finagent.cli tools                # 不需要 API key，演示只读工具层
 """
 from __future__ import annotations
 
@@ -51,7 +51,6 @@ def tools_demo() -> None:
         ("get_key_financials", {"ticker": "MSFT", "metrics": ["revenue", "net_income"], "period": "annual", "limit": 2}),
         ("portfolio_risk", {"holdings": [{"ticker": "NVDA", "weight": 0.5}, {"ticker": "TSLA", "weight": 0.3},
                                          {"ticker": "AAPL", "weight": 0.2}]}),
-        ("draft_order", {"ticker": "MSFT", "side": "buy", "quantity": 5}),
     ]
     for name, args in demos:
         res, ms = call_tool(name, args)
@@ -79,6 +78,10 @@ def main(argv=None) -> int:
     if args.cmd == "ask":
         tr = agent.run(args.query)
         print_trace(tr)
+        if tr.stop_reason == "llm_error":
+            detail = next((s.error for s in reversed(tr.steps) if s.error), "模型服务请求失败")
+            print(f"模型请求失败: {detail}", file=sys.stderr)
+            return 1
         print("\n" + tr.final_answer)
         return 0
     print("输入问题，Ctrl-D 退出。")
@@ -91,6 +94,10 @@ def main(argv=None) -> int:
             continue
         tr = agent.run(q)
         print_trace(tr)
+        if tr.stop_reason == "llm_error":
+            detail = next((s.error for s in reversed(tr.steps) if s.error), "模型服务请求失败")
+            print(f"模型请求失败: {detail}", file=sys.stderr)
+            continue
         print("\n助手> " + tr.final_answer)
 
 

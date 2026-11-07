@@ -6,9 +6,11 @@
 
 本报告只记录实际跑出来的数字。没跑的项目标为"待运行"。原始结果文件在 `eval/results/`，HTML 版本由 `python scripts/build_report.py` 生成到 `reports/eval_report.html`。
 
+**后续维护说明（2026-11-07）：** 本报告中的模型成功率和引用率是 2026-11-05 按旧评分口径生成的历史结果。之后引用评分改为要求每道必引题都标注人工证据句，且被引用段落必须包含该句；模型评测尚未在新口径下重跑。原始 41 项测试记录归档于 `eval/results/pytest_2026-11-05.txt`；当前 64 项测试结果见 `eval/results/pytest.txt`。
+
 ## 1. 工具层单元测试
 
-命令：`python -m pytest -v`，结果文件 `eval/results/pytest.txt`。
+命令：`python -m pytest -v`，历史结果文件 `eval/results/pytest_2026-11-05.txt`。
 
 **41 passed，0 failed。**
 

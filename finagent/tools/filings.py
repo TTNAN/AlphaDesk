@@ -29,8 +29,13 @@ def _best_window(text: str, query: str, size: int = SNIPPET_CHARS) -> str:
 def search_filings(query: str, ticker: str | None = None, form: str | None = None, k: int = 5) -> dict:
     if not query or not query.strip():
         raise ValueError("query 不能为空")
-    if ticker and ticker.upper() not in config.COMPANIES:
+    ticker = ticker.upper() if ticker else None
+    if ticker and ticker not in config.COMPANIES:
         raise ValueError(f"不支持的公司 {ticker}，财报库: {', '.join(config.COMPANIES)}")
+    if form:
+        form = form.upper().replace("10K", "10-K").replace("10Q", "10-Q")
+        if form not in ("10-K", "10-Q"):
+            raise ValueError("form 只能是 10-K 或 10-Q")
     k = max(1, min(int(k), 10))
     hits = get_retriever().search(query, ticker=ticker, form=form, k=k)
     results = []
@@ -60,6 +65,10 @@ def get_key_financials(ticker: str, metrics: list[str] | None = None, period: st
         raise ValueError(f"不支持的公司 {ticker}")
     if period not in ("annual", "quarterly"):
         raise ValueError("period 只能是 annual 或 quarterly")
+    limit = int(limit)
+    if limit < 1:
+        raise ValueError("limit 必须至少为 1")
+    limit = min(limit, 20)
     facts = load_facts(t)
     available = list(facts["metrics"])
     wanted = metrics or available

@@ -65,23 +65,22 @@ def score(task: dict, tr: dict) -> dict:
         retrieved = set(tr["tags"].get("retrieved_chunks", []))
         r = get_retriever()
         exists = [c for c in cited if c in r.by_id]
-        # grounded：引用的 chunk 必须存在，且确实是本次运行中 search_filings 返回过的
-        grounded = bool(cited) and all(c in retrieved for c in cited)
-        correct = grounded
+        # 引用必须存在、来自本轮检索，且任务必须提供人工标注的证据句。
+        grounded = bool(cited) and all(c in retrieved and c in r.by_id for c in cited)
+        span = norm(cit.get("gold_span", ""))
+        correct = grounded and bool(span)
         if cit.get("ticker"):
             correct = correct and all(c.startswith(cit["ticker"] + "-") for c in cited)
-        if cit.get("gold_span"):
-            # 引用的 chunk 含标注原文句，或含答案关键数字（如收入明细表），都视为支持答案
-            span = norm(cit["gold_span"])
-            figs = [norm(x) for x in task.get("answer_contains_any", []) if sum(ch.isdigit() for ch in x) >= 2]
-            correct = correct and any(span in norm(r.by_id[c].text) or any(f in norm(r.by_id[c].text) for f in figs)
-                                      for c in exists)
+        if span:
+            correct = correct and any(span in norm(r.by_id[c].text) for c in exists)
+        else:
+            labels.append("missing_citation_gold_span")
         checks["citation"] = correct
         if not cited:
             labels.append("missing_citation")
         elif not grounded:
             labels.append("invalid_citation")
-        elif not correct:
+        elif not correct and span:
             labels.append("wrong_citation")
     else:
         checks["citation"] = None

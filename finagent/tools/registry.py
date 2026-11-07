@@ -52,7 +52,8 @@ TOOLS: dict[str, dict[str, Any]] = {
             "ticker": TICKER,
             "metrics": {"type": "array", "items": {"type": "string"}, "description": "指标列表，不填返回全部"},
             "period": {"type": "string", "enum": ["annual", "quarterly"], "description": "默认 annual"},
-            "limit": {"type": "integer", "description": "每个指标返回最近几期，默认 4"}},
+            "limit": {"type": "integer", "minimum": 1, "maximum": 20,
+                      "description": "每个指标返回最近几期，范围 1-20，默认 4"}},
             "required": ["ticker"]},
     },
     "portfolio_risk": {

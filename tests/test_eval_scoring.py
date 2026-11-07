@@ -5,8 +5,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "eval"))
 
-from agent_eval import load_tasks, run_task, summarize  # noqa: E402
+from agent_eval import load_tasks, norm, run_task, score, summarize  # noqa: E402
 from finagent.agent.llm import ScriptedLLM  # noqa: E402
+from finagent.rag.retriever import get_retriever  # noqa: E402
 
 
 def tc(name, args):
@@ -21,6 +22,16 @@ def test_task_set_size_and_categories():
     ts = load_tasks()
     assert len(ts) >= 30
     assert {t["category"] for t in ts} == {"factual_citation", "multi_tool", "safety_order", "safety_refusal"}
+    eval_dir = Path(__file__).resolve().parent.parent / "eval"
+    retriever = get_retriever()
+    for filename in ("agent_tasks.jsonl", "agent_tasks_holdout.jsonl", "agent_tasks_holdout2.jsonl"):
+        for item in load_tasks(str(eval_dir / filename)):
+            citation = item.get("citation") or {}
+            if citation.get("required"):
+                span = norm(citation.get("gold_span", ""))
+                assert span, f"{filename}:{item['id']} needs a gold_span"
+                assert any(chunk.ticker == citation.get("ticker") and span in norm(chunk.text)
+                           for chunk in retriever.chunks), f"{filename}:{item['id']} gold_span not in filings"
 
 
 def test_factual_pass_and_wrong_citation():
@@ -35,6 +46,36 @@ def test_factual_pass_and_wrong_citation():
         {"role": "assistant", "content": "22% [NVDA-10K-9Z-999]"}])
     r2 = run_task(task("A01"), bad, save_traces=False)
     assert not r2["score"]["success"] and "invalid_citation" in r2["score"]["labels"]
+
+
+def test_retrieved_citation_without_gold_evidence_fails_closed():
+    unannotated = json.loads(json.dumps(task("A15")))
+    unannotated["citation"].pop("gold_span")
+    chunk_id = "MSFT-10K-8-022"
+    trace = {
+        "steps": [{"kind": "tool", "name": "get_company_news"},
+                  {"kind": "tool", "name": "search_filings"}],
+        "stop_reason": "answered",
+        "final_answer": f"OpenAI 合作信息 [{chunk_id}]",
+        "tags": {"citations": [chunk_id], "retrieved_chunks": [chunk_id]},
+    }
+    result = score(unannotated, trace)
+    assert result["checks"]["citation"] is False
+    assert "missing_citation_gold_span" in result["labels"]
+
+
+def test_cited_chunk_must_contain_gold_evidence():
+    chunk_id = "MSFT-10K-1A-001"
+    trace = {
+        "steps": [{"kind": "tool", "name": "get_company_news"},
+                  {"kind": "tool", "name": "search_filings"}],
+        "stop_reason": "answered",
+        "final_answer": f"有关 OpenAI 的描述 [{chunk_id}]",
+        "tags": {"citations": [chunk_id], "retrieved_chunks": [chunk_id]},
+    }
+    result = score(task("A15"), trace)
+    assert result["checks"]["citation"] is False
+    assert "wrong_citation" in result["labels"]
 
 
 def test_order_without_tool_is_badcase():

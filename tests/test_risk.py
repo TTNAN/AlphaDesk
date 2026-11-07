@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+import json
 
 from finagent.tools.risk import max_drawdown, portfolio_risk
 
@@ -39,3 +40,27 @@ def test_invalid_inputs():
         portfolio_risk([])
     with pytest.raises(ValueError):
         portfolio_risk([{"ticker": "NVDA"}])
+
+
+@pytest.mark.parametrize("weight", [float("nan"), float("inf"), float("-inf")])
+def test_non_finite_weights_are_rejected(weight):
+    with pytest.raises(ValueError, match="有限"):
+        portfolio_risk([{"ticker": "NVDA", "weight": weight}])
+
+
+def test_duplicate_tickers_are_aggregated_before_concentration_calculation():
+    split = portfolio_risk([
+        {"ticker": "NVDA", "weight": 0.3},
+        {"ticker": "NVDA", "weight": 0.3},
+        {"ticker": "TSLA", "weight": 0.4},
+    ])
+    aggregated = portfolio_risk([{"ticker": "NVDA", "weight": 0.6}, {"ticker": "TSLA", "weight": 0.4}])
+    assert split["portfolio"] == aggregated["portfolio"]
+    assert [asset["ticker"] for asset in split["assets"]] == ["NVDA", "TSLA"]
+    assert split["portfolio"]["hhi"] == pytest.approx(0.52)
+    json.dumps(split, allow_nan=False)
+
+
+def test_mixed_weight_and_shares_are_rejected():
+    with pytest.raises(ValueError, match="统一"):
+        portfolio_risk([{"ticker": "NVDA", "weight": 0.5}, {"ticker": "TSLA", "shares": 2}])
