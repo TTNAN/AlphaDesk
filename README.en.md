@@ -29,7 +29,7 @@ With [uv](https://docs.astral.sh/uv/) and Git installed, add this to your MCP cl
 
 Simulated orders and the search index are stored in `~/.alphadesk`. Set `FINAGENT_HOME` to change it.
 
-You can also copy the config from [ModelScope MCP](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk), or download `alphadesk.mcpb` from the [latest release](https://github.com/TTNAN/AlphaDesk/releases/latest) (currently v0.1.1) for one-click install in Claude Desktop.
+You can also copy the config from [ModelScope MCP](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk), or download `alphadesk.mcpb` from the [latest release](https://github.com/TTNAN/AlphaDesk/releases/latest) (currently v0.1.2) for one-click install in Claude Desktop.
 
 ## Examples
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "alphadesk"
-version = "0.1.1"
+version = "0.1.2"
 description = "AlphaDesk: US equity research agent with an MCP server (SEC filings RAG with citations, prices, risk, simulated orders with human confirmation)"
 readme = "README.en.md"
 requires-python = ">=3.10"
