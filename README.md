@@ -29,7 +29,7 @@
 
 模拟订单和检索索引保存在 `~/.alphadesk`（Windows 为 `C:\Users\你的用户名\.alphadesk`），可用环境变量 `FINAGENT_HOME` 改位置。
 
-也可以从[魔搭 MCP 广场](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk)复制配置，或在 [Release](https://github.com/TTNAN/AlphaDesk/releases/latest)（当前 v0.1.1）下载 `alphadesk.mcpb` 一键安装到 Claude Desktop。
+也可以从[魔搭 MCP 广场](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk)复制配置，或在 [Release](https://github.com/TTNAN/AlphaDesk/releases/latest)（当前 v0.1.2）下载 `alphadesk.mcpb` 一键安装到 Claude Desktop。
 
 ## 使用示例
 
