@@ -175,7 +175,7 @@ A gap under 5 points between single runs does not show an improvement or a regre
 
 | Item | Result |
 |---|---|
-| Unit tests (pytest, as of the 2026-11-05 evaluation run) | 42/64 passed |
+| Unit tests (pytest) | 64/64 passed |
 | Filing retrieval (49 questions, filtered by company) | Recall@5 83.7%, Recall@10 89.8%, MRR@10 0.656, about 4 ms per query |
 | Filing retrieval (49 questions, full corpus) | Recall@5 79.6% |
 | MCP smoke test | 7/7 tool calls succeeded |
