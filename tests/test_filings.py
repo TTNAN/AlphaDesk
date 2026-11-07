@@ -51,6 +51,8 @@ def test_search_filings_rejects_empty_and_unknown():
         search_filings("  ")
     with pytest.raises(ValueError):
         search_filings("revenue", ticker="GOOG")
+    with pytest.raises(ValueError, match="form"):
+        search_filings("revenue", form="8-K")
 
 
 def test_key_financials_annual_durations():
@@ -64,3 +66,9 @@ def test_key_financials_quarterly_and_unknown_metric():
     f = get_key_financials("MSFT", metrics=["revenue", "foo"], period="quarterly", limit=2)
     assert len(f["metrics"]["revenue"]["values"]) == 2
     assert f["unknown_metrics"] == ["foo"]
+
+
+@pytest.mark.parametrize("limit", [0, -1])
+def test_key_financials_rejects_non_positive_limit(limit):
+    with pytest.raises(ValueError, match="至少为 1"):
+        get_key_financials("AAPL", metrics=["revenue"], limit=limit)

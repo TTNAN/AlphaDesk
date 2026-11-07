@@ -11,6 +11,9 @@ def test_quote_fields_and_consistency():
     assert q["close"] == round(rows[-1]["close"], 4)
     assert q["change_pct"] == round((rows[-1]["close"] / rows[-2]["close"] - 1) * 100, 3)
     assert q["low_52w"] <= q["close"] <= q["high_52w"]
+    assert q["data_age_days"] >= 0
+    assert isinstance(q["stale"], bool)
+    assert q["refresh_status"] in {"offline_cache", "refreshed", "cached_after_refresh_failure"}
 
 
 def test_price_history_length_and_return():
@@ -26,6 +29,15 @@ def test_price_history_clamps_days():
 def test_unknown_ticker_rejected():
     with pytest.raises(ValueError):
         get_quote("GME")
+
+
+def test_quote_rejects_short_cache(monkeypatch):
+    import finagent.tools.market as market
+    monkeypatch.setattr(market, "load_prices", lambda _: {
+        "source": "test", "rows": [{"date": "2026-11-05", "close": 1.0}],
+    })
+    with pytest.raises(ValueError, match="至少需要两个"):
+        get_quote("AAPL")
 
 
 def test_news_cached():

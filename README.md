@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-42%20passed-brightgreen)](eval/results/pytest.txt)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-64%20passed-brightgreen)](eval/results/pytest.txt)
 
 **中文** | [English](README.en.md)
 
@@ -110,7 +110,9 @@
 
 - `draft_order` 只返回订单号和状态 `PENDING_CONFIRMATION`，确认令牌不出现在模型可见的任何输出中。
 - 确认只能由用户在本地终端执行 `python -m finagent.orders confirm 订单号`。
-- 额外校验：股票代码白名单、数量为正整数、限价单必须给价格、单笔名义金额上限 10 万美元、待确认订单 10 分钟过期。
+- 额外校验：股票代码白名单、数量为正整数、限价单必须给有限正数、单笔名义金额上限 10 万美元、同一标的/方向 10 分钟累计上限 10 万美元。
+- 市价模拟订单只接受 7 天内的收盘价；过旧行情会拒绝下单，用户也可提供明确限价。行情查询会返回日期、年龄和缓存刷新状态。
+- 订单账本使用原子写入和文件锁；POSIX 系统上的账本与锁文件权限为 `0600`。订单、画像和索引默认保存在 `~/.alphadesk`，不会写进源码仓库。
 - 代码中没有任何真实交易路径。
 - 违规请求（保证收益、内幕消息、操纵股价）由模型拒答，评测中 6/6 通过。
 
@@ -319,7 +321,7 @@ finagent/
   cli.py               命令行入口
 eval/                  检索评测题、Agent 评测任务、评测脚本、结果
 scripts/               数据抓取、建索引、MCP 冒烟测试、生成报告
-tests/                 42 项单元测试
+tests/                  64 项单元测试
 docs/                  PRD、评测报告
 data/cache/            离线数据快照
 ```
@@ -335,7 +337,7 @@ data/cache/            离线数据快照
 | Yahoo Finance | 日线行情、公司新闻 |
 | 东方财富 | 日线行情备用源 |
 
-刷新数据（需联网，SEC 要求 User-Agent 带联系方式）：
+刷新数据（需联网；在线访问 SEC 前必须显式设置真实项目名称和联系方式，不会使用占位联系人）：
 
 ```powershell
 $env:SEC_USER_AGENT="your-name your@email.com"

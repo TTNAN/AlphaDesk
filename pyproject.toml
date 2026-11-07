@@ -19,6 +19,10 @@ dependencies = [
   "numpy>=1.26",
 ]
 
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+eval = ["nltk>=3.8"]
+
 [project.urls]
 Homepage = "https://github.com/TTNAN/AlphaDesk"
 

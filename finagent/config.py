@@ -7,20 +7,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 _PKG = Path(__file__).resolve().parent
 
-# 两种运行方式：
-# 1) 克隆仓库运行：数据在仓库 data/ 下。
-# 2) pip / uvx 安装运行：只读缓存随包安装在 finagent/_data/cache，
-#    可写文件（索引、模拟订单、trace）放到 FINAGENT_HOME，默认 ~/.alphadesk。
-if (ROOT / "data" / "cache").is_dir() and not os.getenv("FINAGENT_HOME"):
-    DATA_DIR = ROOT / "data"
-    CACHE_DIR = DATA_DIR / "cache"
-    _WORK = ROOT
-else:
-    _WORK = Path(os.getenv("FINAGENT_HOME", str(Path.home() / ".alphadesk")))
-    DATA_DIR = _WORK / "data"
-    CACHE_DIR = _PKG / "_data" / "cache"
-    if not CACHE_DIR.is_dir() and (ROOT / "data" / "cache").is_dir():
-        CACHE_DIR = ROOT / "data" / "cache"
+# 缓存快照可随源码或安装包提供；订单、用户画像、索引和 trace 一律写入私有工作目录。
+_WORK = Path(os.getenv("FINAGENT_HOME", str(Path.home() / ".alphadesk"))).expanduser()
+DATA_DIR = _WORK / "data"
+_REPO_CACHE = ROOT / "data" / "cache"
+_BUNDLED_CACHE = _PKG / "_data" / "cache"
+CACHE_DIR = _REPO_CACHE if _REPO_CACHE.is_dir() else _BUNDLED_CACHE
+if not CACHE_DIR.is_dir() and _REPO_CACHE.is_dir():
+    CACHE_DIR = _REPO_CACHE
 PRICES_DIR = CACHE_DIR / "prices"
 FILINGS_DIR = CACHE_DIR / "filings"
 FACTS_DIR = CACHE_DIR / "facts"
@@ -29,11 +23,12 @@ INDEX_DIR = DATA_DIR / "index"
 TRACE_DIR = _WORK / "traces"
 REPORT_DIR = _WORK / "reports"
 PROFILE_PATH = DATA_DIR / "user_profile.json"
+MAX_MARKET_DATA_AGE_DAYS = 7
 
 # SEC 要求请求头带上联系方式，见 https://www.sec.gov/os/accessing-edgar-data
 SEC_USER_AGENT = os.getenv(
-    "SEC_USER_AGENT", "AlphaDesk research project contact@example.com"
-)
+    "SEC_USER_AGENT", ""
+).strip()
 HTTP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AlphaDesk/0.1"
 
 # 标的池：5 家纳斯达克公司 + QQQ 作为 beta 基准
