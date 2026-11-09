@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.TTNAN%2Falphadesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP_%E5%B9%BF%E5%9C%BA-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![mcprush](https://mcprush.com/badge/alphadesk-mcp/compact.svg)](https://mcprush.com/to/alphadesk-mcp?ref=badge) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-64%20passed-brightgreen)](eval/results/pytest.txt) [![M8ven Verified](https://m8ven.ai/badge/mcp/ttnan/alphadesk?variant=verified)](https://m8ven.ai/mcp/ttnan/alphadesk?s=readme)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-AlphaDesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD_MCP-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![mcprush](https://mcprush.com/badge/alphadesk-mcp/compact.svg)](https://mcprush.com/to/alphadesk-mcp?ref=badge) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![tests](https://img.shields.io/badge/tests-64%20passed-brightgreen)](eval/results/pytest.txt) [![M8ven Verified](https://m8ven.ai/badge/mcp/ttnan/alphadesk?variant=verified)](https://m8ven.ai/mcp/ttnan/alphadesk?s=readme)
 
 **中文** | [English](README.en.md)
 
