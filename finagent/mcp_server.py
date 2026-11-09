@@ -15,6 +15,8 @@ try:  # mcp >= 2.0
 except ImportError:  # mcp 1.x
     from mcp.server.fastmcp import FastMCP as _Server
 
+from mcp.types import ToolAnnotations
+
 from .tools.registry import call_tool
 
 warnings.filterwarnings("ignore")
@@ -29,6 +31,18 @@ mcp = _Server(
     ),
 )
 
+# Tool annotations（MCP 协议）：按各工具的真实行为定。
+# 读行情/新闻/风控类：只读数据，不改用户状态；非离线模式（FINAGENT_OFFLINE=0）下会联网刷新缓存。
+_ANN_READ_ONLINE = ToolAnnotations(readOnlyHint=True, destructiveHint=False,
+                                  idempotentHint=True, openWorldHint=True)
+# 纯本地检索/计算：只读本地财报索引与 XBRL 快照，全程不联网。
+_ANN_READ_LOCAL = ToolAnnotations(readOnlyHint=True, destructiveHint=False,
+                                 idempotentHint=True, openWorldHint=False)
+# 模拟下单：每次调用在本地账本新建一条 PENDING 订单（新 order_id + 确认 token），改状态且重复调用不等效；
+# 市价单读行情（非离线时可联网），限价单不联网。只新建记录，不删除/修改已有订单。
+_ANN_DRAFT_ORDER = ToolAnnotations(readOnlyHint=False, destructiveHint=False,
+                                  idempotentHint=False, openWorldHint=True)
+
 
 def _run(name: str, **kwargs) -> str:
     args = {k: v for k, v in kwargs.items() if v is not None}
@@ -36,44 +50,44 @@ def _run(name: str, **kwargs) -> str:
     return json.dumps(res, ensure_ascii=False)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_ONLINE)
 def get_quote(ticker: str) -> str:
     """查询最新日线收盘价、涨跌幅、52 周高低点（非实时）。ticker: NVDA/MSFT/AAPL/TSLA/AMZN/QQQ"""
     return _run("get_quote", ticker=ticker)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_ONLINE)
 def get_price_history(ticker: str, days: int = 30) -> str:
     """查询最近 N 个交易日收盘价和区间涨跌幅。"""
     return _run("get_price_history", ticker=ticker, days=days)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_ONLINE)
 def get_company_news(ticker: str, limit: int = 5) -> str:
     """查询公司近期新闻标题（Yahoo Finance RSS 缓存）。"""
     return _run("get_company_news", ticker=ticker, limit=limit)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_LOCAL)
 def search_filings(query: str, ticker: str | None = None, form: str | None = None, k: int = 5) -> str:
     """在最新 10-K/10-Q 原文中做 BM25 检索，返回带 chunk_id 的段落。回答时用 [chunk_id] 引用。query 建议用英文。"""
     return _run("search_filings", query=query, ticker=ticker, form=form, k=k)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_LOCAL)
 def get_key_financials(ticker: str, metrics: list[str] | None = None, period: str = "annual",
                        limit: int = 4) -> str:
     """查询 SEC XBRL 结构化财务数据（revenue, net_income, eps_diluted, operating_cash_flow, capex 等）。"""
     return _run("get_key_financials", ticker=ticker, metrics=metrics, period=period, limit=limit)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_READ_ONLINE)
 def portfolio_risk(holdings: list[dict], lookback_days: int = 252) -> str:
     """计算组合年化波动率、最大回撤、HHI 集中度、相对 QQQ 的 beta。holdings 例: [{"ticker":"NVDA","weight":0.6}]"""
     return _run("portfolio_risk", holdings=holdings, lookback_days=lookback_days)
 
 
-@mcp.tool()
+@mcp.tool(annotations=_ANN_DRAFT_ORDER)
 def draft_order(ticker: str, side: str, quantity: int, order_type: str = "market",
                 limit_price: float | None = None) -> str:
     """生成模拟订单（PENDING_CONFIRMATION）。不执行真实交易。需用户在本地 CLI 人工确认。"""
