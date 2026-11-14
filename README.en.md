@@ -1,6 +1,6 @@
 # AlphaDesk
 
-[![MCP Registry](https://img.shields.io/badge/MCP-AlphaDesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![mcprush](https://mcprush.com/badge/alphadesk-mcp/compact.svg)](https://mcprush.com/to/alphadesk-mcp?ref=badge) [![tests](https://img.shields.io/badge/tests-64-brightgreen)](eval/results/pytest.txt) [![M8ven Verified](https://m8ven.ai/badge/mcp/ttnan/alphadesk?variant=verified)](https://m8ven.ai/mcp/ttnan/alphadesk?s=readme)
+[![MCP Registry](https://img.shields.io/badge/MCP-AlphaDesk-0a7d57)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.TTNAN/alphadesk) [![ModelScope MCP](https://img.shields.io/badge/%E9%AD%94%E6%90%AD-AlphaDesk-624aff)](https://www.modelscope.cn/mcp/servers/CaesarTT/alphadesk) [![mcprush](https://mcprush.com/badge/alphadesk-mcp/compact.svg)](https://mcprush.com/to/alphadesk-mcp?ref=badge) [![tests](https://img.shields.io/badge/tests-64-brightgreen)](eval/results/pytest.txt) [![M8ven Score](https://m8ven.ai/badge/mcp/ttnan-alphadesk-jy530w?v=b061ccd8ef3404a64a9934bd60cb0039&variant=verified)](https://m8ven.ai/mcp/ttnan-alphadesk-jy530w?s=readme)
 
 [中文](README.md) | **English**
 
