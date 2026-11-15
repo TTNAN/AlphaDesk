@@ -15,3 +15,15 @@ def isolated_state(tmp_path, monkeypatch):
     monkeypatch.setattr(orders, "ORDERS_PATH", tmp_path / "orders.json")
     monkeypatch.setattr(config, "TRACE_DIR", tmp_path / "traces")
     yield
+
+@pytest.fixture(autouse=True)
+def snapshot_prices_are_fresh(monkeypatch):
+    """把“今天”钉在快照的最新行情日期，避免墙上时钟越过快照 7 天有效期后测试变红。"""
+    from datetime import date
+
+    from finagent import config
+    from finagent.data_sources import load_prices
+    from finagent.tools import orders
+
+    latest = max(date.fromisoformat(load_prices(t)["rows"][-1]["date"]) for t in config.PRICE_TICKERS)
+    monkeypatch.setattr(orders, "_utc_today", lambda: latest)
