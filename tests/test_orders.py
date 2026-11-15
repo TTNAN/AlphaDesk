@@ -11,13 +11,6 @@ from finagent.tools import orders
 from finagent.tools.registry import call_tool
 
 
-@pytest.fixture(autouse=True)
-def snapshot_prices_are_fresh(monkeypatch):
-    """订单测试以快照的最新行情日期为基准，避免多年后测试被旧快照时效影响。"""
-    latest = max(date.fromisoformat(load_prices(t)["rows"][-1]["date"]) for t in config.PRICE_TICKERS)
-    monkeypatch.setattr(orders, "_utc_today", lambda: latest)
-
-
 def test_draft_hides_token_and_is_pending():
     res, _ = call_tool("draft_order", {"ticker": "AAPL", "side": "buy", "quantity": 2})
     assert res["status"] == "PENDING_CONFIRMATION" and res["simulated"] is True
