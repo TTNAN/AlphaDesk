@@ -347,6 +347,14 @@ python scripts\fetch_data.py
 python scripts\build_index.py
 ```
 
+## Buy me a coffee
+
+If this project saved you some time, feel free to buy me a coffee. ☕
+
+| WeChat Reward |
+| ---------- |
+| <img src="assets/wechat-pay.png" width="220" alt="WeChat Reward QR"> |
+
 ## License
 
 MIT

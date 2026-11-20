@@ -346,6 +346,14 @@ python scripts\fetch_data.py
 python scripts\build_index.py
 ```
 
+## 请我喝杯咖啡
+
+如果这个项目帮你省了点时间，欢迎请我喝杯咖啡。☕
+
+| 微信赞赏码 |
+| -------- |
+| <img src="assets/wechat-pay.png" width="220" alt="微信赞赏码"> |
+
 ## 许可
 
 MIT
